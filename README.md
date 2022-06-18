@@ -30,7 +30,6 @@ d. o número de horas extras 100%;
 e. em seguida exiba o salário bruto... Fórmula: (b * a) + (c * a * 1.5) + (d * a * 2).
 
 6. Criar um tradutor que traduza as seguintes palavras de inglês para português e de português para inglês.
-|--- |--- |
 | Cachorro | Dog |
 | Tempo | Time |
 | Amor | Love |
@@ -39,7 +38,6 @@ e. em seguida exiba o salário bruto... Fórmula: (b * a) + (c * a * 1.5) + (d *
 | Triste | Sad |
 | Deveria | Shoud |
 | Poderia | Could |
-|--- |--- |
 OBS: Caso o usuário informe alguma outra palavra o programa deverá informar a seguinte mensagem: Essa
 palavra não é válida.
 OBS2: traduzir de inglês para português e de português para inglês.
