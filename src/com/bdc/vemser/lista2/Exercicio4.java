@@ -21,5 +21,6 @@ public class Exercicio4 {
             }
         }
         System.out.println("O menor numero se encontra na posição de : "+posicao);
+        scanner.close();
     }
 }
