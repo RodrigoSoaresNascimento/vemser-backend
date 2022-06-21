@@ -1,4 +1,4 @@
-package lista1;
+package com.bdc.vemser.lista1;
 
 import java.util.Scanner;
 

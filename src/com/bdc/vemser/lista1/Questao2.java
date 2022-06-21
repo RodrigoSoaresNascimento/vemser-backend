@@ -1,4 +1,4 @@
-package lista1;
+package com.bdc.vemser.lista1;
 
 import java.util.Scanner;
 
@@ -12,19 +12,16 @@ public class Questao2 {
             nota += scanner.nextDouble();
         }
 
-        System.out.printf("sua média é : %.2f\n É sua situação é : %s",calcularMedia(nota), situacaoAluno(calcularMedia(nota)));
-    }
-    public static double calcularMedia (double nota){
-        return (nota) / 4;
+        String situacaoAluno = "";
+        if(nota <= 5){
+            situacaoAluno = "Reprovado";
+        }else if (nota < 7){
+            situacaoAluno =  "Em exame";
+        }else{
+            situacaoAluno = "Aprovado";
+        }
+
+        System.out.printf("sua média é : %.2f\nÉ sua situação é : %s",(nota) / 4, situacaoAluno);
     }
 
-    public static String situacaoAluno (double nota){
-        if(nota <= 5){
-            return "Reprovado";
-        }else if (nota < 7){
-            return  "Em exame";
-        }else{
-            return "Aprovado";
-        }
-    }
 }

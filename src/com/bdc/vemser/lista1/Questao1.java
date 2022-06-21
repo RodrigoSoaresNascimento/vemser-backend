@@ -1,4 +1,4 @@
-package lista1;
+package com.bdc.vemser.lista1;
 
 import java.util.Scanner;
 
@@ -16,11 +16,8 @@ public class Questao1 {
         System.out.print("Digite seu estado : ");
         String estado = scan.nextLine();
 
-        System.out.println(mensagem(nome,idade,cidade,estado));
-    }
-    public static String mensagem (String nome, int idade, String cidade, String estado){
-        return String.format("Olá seu nome %s, você tem %d anos," +
-                "é da cidade de %s, situada no estado de %s ",nome,idade,cidade,estado);
+        System.out.print(String.format("Olá seu nome %s, você tem %d anos," +
+                "é da cidade de %s, situada no estado de %s ",nome,idade,cidade,estado));
     }
 
 }

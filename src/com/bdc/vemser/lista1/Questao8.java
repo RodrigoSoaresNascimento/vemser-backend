@@ -1,4 +1,4 @@
-package lista1;
+package com.bdc.vemser.lista1;
 
 import java.util.Scanner;
 
@@ -11,12 +11,8 @@ public class Questao8 {
         double base = scanner.nextDouble();
         System.out.print("Digite o comprimento da altura do retângulo : ");
         double altura = scanner.nextDouble();
-        System.out.println(calcularAreaRetanngulo(base,altura));
+        System.out.printf("A área deste retangulo é : %.2f", (base * altura));
 
     }
 
-    public static String calcularAreaRetanngulo (double base, double altura){
-
-        return String.format("A área deste retangulo é : %.2f", (base * altura));
-    }
 }
