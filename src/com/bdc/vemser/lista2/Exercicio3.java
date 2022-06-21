@@ -11,7 +11,7 @@ public class Exercicio3 {
         double maiorPeso = 0;
         int maiorIdade = 0;
         double maiorAltura = 0;
-
+        String jogador = "";
         while (true){
             System.out.print("Digite o nome do jogador ou digite a palavra (sair) para encerrar o cadastro : ");
             String nomeJogador = scanner.nextLine();
@@ -30,6 +30,7 @@ public class Exercicio3 {
             }
             if(alturaJogador > maiorAltura){
                 maiorAltura = alturaJogador;
+                jogador = nomeJogador;
             }
             somaAlturas += alturaJogador;
             System.out.print("Digite a idade do jogador : ");
@@ -40,6 +41,7 @@ public class Exercicio3 {
             }
             if(idadeJogador > maiorIdade){
                 maiorIdade = idadeJogador;
+                jogador = nomeJogador;
             }
             System.out.print("Digite o peso do jogador : ");
             double pesoJogador = scanner.nextDouble();
@@ -49,6 +51,7 @@ public class Exercicio3 {
             }
             if(pesoJogador > maiorPeso){
                 maiorPeso = pesoJogador;
+                jogador = nomeJogador;
             }
             scanner.nextLine();
             jogadoresCadastrados++;
@@ -57,9 +60,9 @@ public class Exercicio3 {
 
         System.out.println("Informações cadastrais : ");
         System.out.printf("O numero de jogadores cadastrados é : %d\n",jogadoresCadastrados);
-        System.out.printf("O maior jogador tem uma altura de : %.2f\n",maiorAltura);
-        System.out.printf("O jogador mais velho tem uma idade de : %d\n",maiorIdade);
-        System.out.printf("O jogador mais pesado tem um peso de : %.2f\n",maiorPeso);
+        System.out.printf("O maior jogador tem uma altura de : %.2f e seu nome é %s\n",maiorAltura,jogador);
+        System.out.printf("O jogador mais velho tem uma idade de : %de e seu nome é %s\n",maiorIdade,jogador);
+        System.out.printf("O jogador mais pesado tem um peso de : %.2f e seu nome é %s\n",maiorPeso,jogador);
         System.out.printf("A media das alturas do jogador é : %.2f\n",somaAlturas/jogadoresCadastrados);
         scanner.close();
     }

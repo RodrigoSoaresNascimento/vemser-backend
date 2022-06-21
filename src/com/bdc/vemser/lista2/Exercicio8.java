@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Exercicio8 {
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         double maiorNota = 0;
         double[][] matrix = new double[5][4];

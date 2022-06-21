@@ -15,5 +15,6 @@ public class Exercicio5 {
         for(int j = array.length - 1 ; j >= 0; j--){
             System.out.println(array[j]);
         }
+        scanner.close();
     }
 }

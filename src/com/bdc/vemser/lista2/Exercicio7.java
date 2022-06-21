@@ -1,13 +1,19 @@
 package com.bdc.vemser.lista2;
 
+import java.util.Scanner;
+
 public class Exercicio7 {
     public static void main(String[] args) {
-        int[][] matrix = {
-                {22,33,66,2},
-                {1,8,9,89},
-                {99,23,6,8},
-                {12,19,3,56}
-        };
+
+        Scanner scanner = new Scanner(System.in);
+
+        int[][] matrix = new int[4][4];
+        for(int linha = 0; linha < matrix[0].length; linha++){
+            for(int coluna = 0; coluna < matrix.length; coluna++ ){
+                System.out.print("Digite um numero inteiro : ");
+                matrix[linha][coluna] = scanner.nextInt();
+            }
+        }
         int contador = 0;
         for(int linha = 0; linha < matrix[0].length; linha++){
             for(int coluna = 0; coluna < matrix.length; coluna++ ){

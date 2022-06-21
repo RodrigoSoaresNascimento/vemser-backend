@@ -1,31 +1,25 @@
 package com.bdc.vemser.lista2;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Exercicio2 {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        final int numeroEscolhido = 55;
-        int numeroDigitado;
 
+        Random random = new Random();
+        final int numeroEscolhido = random.nextInt(11);
+        int numeroDigitado;
+        System.out.println("O java vai escolher um numero aleatorio de 0 a 10");
+        System.out.println("Sua tarefa é descobrir qual é esse numero!");
         do{
-            System.out.print("Digite um número inteiro aleatorio : ");
+            System.out.println("Escolha um número de 1 a 10!");
             numeroDigitado = scanner.nextInt();
-            if(numeroDigitado > 100){
-                System.out.println("O numero está muito longe reduza o valor da sua busca!");
-            }
-            if(numeroDigitado < 100 && numeroDigitado > 80){
-                System.out.println("O número está muito maior continue reduzindo o valor!");
-            }
-            if(numeroDigitado <= 80 && numeroDigitado >= 60){
-                System.out.println("O numero ainda está maior mas está se aproximando!");
-            }
-            if(numeroDigitado < 60 && numeroDigitado > 30){
-                System.out.println("Continue está muito mais proximo!");
-            }
-            if(numeroDigitado < 30){
-                System.out.println("O numero está muito menor aumente o valor da busca");
+            if(numeroEscolhido > numeroDigitado){
+                System.out.println("O numero escolhido é maior que o digitado!");
+            }else{
+                System.out.println("O numero escolhido é menor que o inserido!");
             }
 
         }while (numeroDigitado != numeroEscolhido);
