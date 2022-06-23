@@ -8,9 +8,8 @@ public class Cliente {
     void imprimirContatos () {
 
         for(Contato contato : contatos){
-            if(contato == null){
-                System.out.println("Não há informações cadastradas no contato! por favor preencha o formulario!");
-            }else{
+
+            if(contato != null){
                 System.out.println(contato);
             }
 
@@ -20,12 +19,10 @@ public class Cliente {
     void imprimirEnderecos () {
 
         for(Endereco endereco : enderecos){
-            if(endereco == null){
-                System.out.println("Não existe informações de endereço cadastradas!, por favor preencha o formulario!");
-            }else{
+
+            if(endereco != null){
                 System.out.println(endereco);
             }
-
         }
     }
 
