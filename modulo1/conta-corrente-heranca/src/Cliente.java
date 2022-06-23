@@ -15,24 +15,19 @@ public class Cliente {
     void imprimirContatos () {
 
         for(Contato contato : this.contatos){
-            if(contato == null){
-                System.out.println("Não há informações cadastradas no contato! por favor preencha o formulario!");
-            }else{
+            if(contato != null){
                 System.out.println(contato);
             }
-
         }
     }
 
     void imprimirEnderecos () {
 
         for(Endereco endereco : this.enderecos){
-            if(endereco == null){
-                System.out.println("Não existe informações de endereço cadastradas!, por favor preencha o formulario!");
-            }else{
+
+            if(endereco != null){
                 System.out.println(endereco);
             }
-
         }
     }
 

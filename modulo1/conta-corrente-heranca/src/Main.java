@@ -41,7 +41,7 @@ public class Main {
 
         ContaCorrente contaCorrente1 = new ContaCorrente(clienteZiadar, "9641", 8899, 500, 250);
 
-        contaCorrente.trasferir(contaCorrente1, 500);
+        contaCorrente.transferir(contaCorrente1, 500);
         System.out.println("O saldo na conta corrente 1 é de : "+contaCorrente1.getSaldo());
         contaCorrente1.imprimirConta();
 
@@ -50,8 +50,8 @@ public class Main {
         poupanca.imprimirConta();
         System.out.printf("Seu saldo com taxa é de : %.2f\n",poupanca.getSaldo());
         System.out.println("Transferido com sucesso ? "+poupanca.transferir(contaCorrente, 2525));
-        System.out.println("è possivel depositar? "+poupanca.depositar(-100));
-        System.out.println("è possivel depositar? "+poupanca.depositar(100));
+        System.out.println("é possivel depositar? "+poupanca.depositar(-100));
+        System.out.println("é possivel depositar? "+poupanca.depositar(100));
         System.out.println("é possivel sacar ? "+poupanca.sacar(1000));
         System.out.println("é possivel sacar ? "+poupanca.sacar(100));
 

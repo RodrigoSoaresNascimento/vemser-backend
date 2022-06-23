@@ -1,4 +1,4 @@
-public class ContaCorrente extends Conta implements Impressao{
+public class ContaCorrente extends Conta implements Impressao {
     private double chequeEspecial;
 
     public void setChequeEspecial(double chequeEspecial) {
@@ -32,31 +32,10 @@ public class ContaCorrente extends Conta implements Impressao{
 
     }
 
-     public boolean depositar (double valor) {
-        if(valor < 0){
-            System.out.println("Não é possivel depositar um valor negativo");
-            return false;
-        }else{
-
-            setSaldo(getSaldo() + valor);
-            return true;
-        }
-
-    }
-
     public double retornarSaldoComChequeEspecial () {
 
         return getSaldo() + chequeEspecial;
 
-    }
-
-    public boolean trasferir (ContaCorrente conta, double valor){
-
-        if(sacar(valor)){
-           return conta.depositar(valor);
-        }
-
-        return false;
     }
 
 }
