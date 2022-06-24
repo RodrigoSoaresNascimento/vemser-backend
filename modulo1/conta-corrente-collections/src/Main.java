@@ -59,7 +59,7 @@ public class Main {
         System.out.println("é possivel sacar ? "+poupanca.sacar(1000));
         System.out.println("é possivel sacar ? "+poupanca.sacar(100));
         ContaPagamento pagamento = new ContaPagamento(clienteZiadar, "6699", "3654", 1500);
-        ContaPagamento pagamento2 = new ContaPagamento(clienteTodoawi, "6699", "1598", 3500);
+        ContaPagamento pagamento2 = new ContaPagamento(clienteTodoawi, "6699", "1598", 300);
         System.out.println();
         pagamento.imprimir();
         System.out.println();
@@ -75,6 +75,12 @@ public class Main {
 
         System.out.println("Testando o a lista vazia : ");
         clienteTodoawi.setContatos(null);
+        clienteTodoawi.setEnderecos(null);
+        System.out.println();
+        System.out.println("Saldo antes da transferencia : "+pagamento2.getSaldo());
+        System.out.println("Tentando sacar valor da conta sem a taxa : "+ pagamento2.sacar(300));
+        pagamento2.transferir(contaCorrente, 300);
+        System.out.println("Saldo ápos a transferencia : "+pagamento2.getSaldo());
 
     }
 }

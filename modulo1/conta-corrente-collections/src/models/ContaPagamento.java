@@ -6,7 +6,7 @@ import models.Cliente;
 
 public class ContaPagamento extends Conta implements Impressao {
 
-    public static double TAXA_SAQUE = 4.25;
+    public final static double TAXA_SAQUE = 4.25;
 
     public ContaPagamento(Cliente cliente, String numeroDaConta, String agencia, double saldo) {
         super(cliente, numeroDaConta, agencia, saldo);
