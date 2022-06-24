@@ -2,10 +2,10 @@ public abstract class Conta implements Movimentacao {
 
     private Cliente cliente;
     private String numeroDaConta;
-    private int agencia;
+    private String agencia;
     private double saldo;
 
-    public Conta(Cliente cliente, String numeroDaConta, int agencia, double saldo) {
+    public Conta(Cliente cliente, String numeroDaConta, String agencia, double saldo) {
         this.cliente = cliente;
         this.numeroDaConta = numeroDaConta;
         this.agencia = agencia;
@@ -28,11 +28,11 @@ public abstract class Conta implements Movimentacao {
         this.numeroDaConta = numeroDaConta;
     }
 
-    public int getAgencia() {
+    public String getAgencia() {
         return agencia;
     }
 
-    public void setAgencia(int agencia) {
+    public void setAgencia(String agencia) {
         this.agencia = agencia;
     }
 

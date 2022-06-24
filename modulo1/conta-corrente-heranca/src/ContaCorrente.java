@@ -5,12 +5,12 @@ public class ContaCorrente extends Conta implements Impressao {
         this.chequeEspecial = chequeEspecial;
     }
 
-    public ContaCorrente(Cliente cliente, String numeroDaConta, int agencia, double saldo, double chequeEspecial) {
+    public ContaCorrente(Cliente cliente, String numeroDaConta, String agencia, double saldo, double chequeEspecial) {
         super(cliente, numeroDaConta, agencia, saldo);
         this.chequeEspecial = chequeEspecial;
     }
 
-    public void imprimirConta () {
+    public void imprimir () {
 
         System.out.println("------- Conta Corrente -------");
         System.out.println("Cliente : "+getCliente().getNome());
