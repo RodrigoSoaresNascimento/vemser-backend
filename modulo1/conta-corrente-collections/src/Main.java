@@ -31,7 +31,7 @@ public class Main {
         clienteTodoawi.imprimirContatos();
         clienteTodoawi.imprimirEnderecos();
 
-        ContaCorrente contaCorrente = new ContaCorrente(clienteTodoawi, "3180", 4455, 1000, 500);
+        ContaCorrente contaCorrente = new ContaCorrente(clienteTodoawi, "3180", "4455", 1000, 500);
 
         System.out.println(contaCorrente.sacar(500));
         System.out.println("Seu saldo é de : "+contaCorrente.retornarSaldoComChequeEspecial());
@@ -43,25 +43,25 @@ public class Main {
         System.out.println(contaCorrente.depositar(500));
         System.out.println(contaCorrente.retornarSaldoComChequeEspecial());
 
-        ContaCorrente contaCorrente1 = new ContaCorrente(clienteZiadar, "9641", 8899, 500, 250);
+        ContaCorrente contaCorrente1 = new ContaCorrente(clienteZiadar, "9641", "8899", 500, 250);
 
         contaCorrente.transferir(contaCorrente1, 500);
         System.out.println("O saldo na conta corrente 1 é de : "+contaCorrente1.getSaldo());
-        contaCorrente1.imprimirConta();
+        contaCorrente1.imprimir();
 
-        ContaPoupanca poupanca = new ContaPoupanca(clienteTodoawi, "6699", 6978, 2500);
+        ContaPoupanca poupanca = new ContaPoupanca(clienteTodoawi, "6699", "6978", 2500);
         poupanca.creditarTaxa();
-        poupanca.imprimirConta();
+        poupanca.imprimir();
         System.out.printf("Seu saldo com taxa é de : %.2f\n",poupanca.getSaldo());
         System.out.println("Transferido com sucesso ? "+poupanca.transferir(contaCorrente, 2525));
         System.out.println("é possivel depositar? "+poupanca.depositar(-100));
         System.out.println("é possivel depositar? "+poupanca.depositar(100));
         System.out.println("é possivel sacar ? "+poupanca.sacar(1000));
         System.out.println("é possivel sacar ? "+poupanca.sacar(100));
-        ContaPagamento pagamento = new ContaPagamento(clienteZiadar, "6699", 3654, 1500);
-        ContaPagamento pagamento2 = new ContaPagamento(clienteTodoawi, "6699", 1598, 3500);
+        ContaPagamento pagamento = new ContaPagamento(clienteZiadar, "6699", "3654", 1500);
+        ContaPagamento pagamento2 = new ContaPagamento(clienteTodoawi, "6699", "1598", 3500);
         System.out.println();
-        pagamento.imprimirConta();
+        pagamento.imprimir();
         System.out.println();
         pagamento.sacar(1000);
         System.out.println("Saldo apos o saque de 1000 : "+pagamento.getSaldo());
@@ -72,5 +72,9 @@ public class Main {
         System.out.println("Saldo da conta corrente : "+ contaCorrente.getSaldo());
         pagamento.depositar(500);
         System.out.println("Deposito na conta pagamento : "+pagamento.getSaldo());
+
+        System.out.println("Testando o a lista vazia : ");
+        clienteTodoawi.setContatos(null);
+
     }
 }

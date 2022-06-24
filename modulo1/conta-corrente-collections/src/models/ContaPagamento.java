@@ -8,7 +8,7 @@ public class ContaPagamento extends Conta implements Impressao {
 
     public static double TAXA_SAQUE = 4.25;
 
-    public ContaPagamento(Cliente cliente, String numeroDaConta, int agencia, double saldo) {
+    public ContaPagamento(Cliente cliente, String numeroDaConta, String agencia, double saldo) {
         super(cliente, numeroDaConta, agencia, saldo);
     }
 
@@ -26,7 +26,7 @@ public class ContaPagamento extends Conta implements Impressao {
     }
 
     @Override
-    public void imprimirConta() {
+    public void imprimir() {
 
         System.out.println("------- abstrac.Conta Pagamento -------");
         System.out.println("models.Cliente : "+getCliente().getNome());
@@ -35,6 +35,16 @@ public class ContaPagamento extends Conta implements Impressao {
         System.out.println("Agencia : "+getAgencia());
         System.out.printf("Saldo : %.2f\n",getSaldo());
 
+    }
+
+    @Override
+    public boolean transferir(Conta conta, double valor) {
+
+        if(sacar(valor - TAXA_SAQUE)){
+            return conta.depositar(valor);
+        }
+
+        return false;
     }
 
 }

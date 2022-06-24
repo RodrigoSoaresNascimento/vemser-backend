@@ -6,8 +6,8 @@ public class Cliente {
 
     private String nome;
     private String cpf;
-    private ArrayList <Contato> contatos = new ArrayList<>();
-    private ArrayList <Endereco> enderecos = new ArrayList<>();
+    private ArrayList <Contato> contatos;
+    private ArrayList <Endereco> enderecos;
 
     public Cliente(String nome, String cpf, ArrayList<Contato> contatos, ArrayList<Endereco> enderecos) {
         this.nome = nome;
@@ -18,21 +18,27 @@ public class Cliente {
 
     public void imprimirContatos() {
 
-        for(Contato contato : this.contatos){
-            if(contato != null){
-                System.out.println(contato);
+        if(this.contatos != null){
+            for(Contato contato : this.contatos){
+                if(contato != null){
+                    System.out.println(contato);
+                }
             }
         }
+
     }
 
     public void imprimirEnderecos() {
 
-        for(Endereco endereco : this.enderecos){
+        if(this.enderecos != null){
+            for(Endereco endereco : this.enderecos){
 
-            if(endereco != null){
-                System.out.println(endereco);
+                if(endereco != null){
+                    System.out.println(endereco);
+                }
             }
         }
+
     }
 
     public void imprimirCliente() {
