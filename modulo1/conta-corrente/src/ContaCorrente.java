@@ -2,7 +2,7 @@ public class ContaCorrente {
 
     Cliente cliente;
     String numeroDaConta;
-    int agencia;
+    String agencia;
     double saldo;
     double chequeEspecial;
 

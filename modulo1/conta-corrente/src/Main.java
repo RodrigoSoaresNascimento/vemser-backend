@@ -55,7 +55,7 @@ public class Main {
         contaCorrente.cliente = cliente;
         contaCorrente.saldo = 1000;
         contaCorrente.chequeEspecial = 500;
-        contaCorrente.agencia = 3180;
+        contaCorrente.agencia = "3180";
         contaCorrente.imprimirContaCorrente();
         System.out.println(contaCorrente.sacar(500));
         System.out.println("Seu saldo é de : "+contaCorrente.retornarSaldoComChequeEspecial());
