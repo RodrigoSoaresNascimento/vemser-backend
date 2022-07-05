@@ -7,28 +7,8 @@
 	},
 	"item": [
 		{
-			"name": "homework1_2",
+			"name": "contato",
 			"item": [
-				{
-					"name": "get/contato",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://back-vemserdbc.herokuapp.com/pessoa",
-							"protocol": "https",
-							"host": [
-								"back-vemserdbc",
-								"herokuapp",
-								"com"
-							],
-							"path": [
-								"pessoa"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "get/contato/5",
 					"protocolProfileBehavior": {
@@ -51,6 +31,26 @@
 							],
 							"path": [
 								"contato"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/contato",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/pessoa",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pessoa"
 							]
 						}
 					},
@@ -121,15 +121,6 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n        \"idContato\": 8,\r\n        \"idPessoa\": 8,\r\n        \"tipoContato\": \"RESIDENCIAL\",\r\n        \"numero\": \"889966554433\",\r\n        \"descricao\": \"whatsapp\"\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://back-vemserdbc.herokuapp.com/contato/8",
 							"protocol": "https",
@@ -145,9 +136,14 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "pessoa",
+			"item": [
 				{
-					"name": "put/pessoa",
+					"name": "get/pessoa",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -167,7 +163,7 @@
 					"response": []
 				},
 				{
-					"name": "put/pessoa/16",
+					"name": "post/pessoa/16",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -196,7 +192,7 @@
 					"response": []
 				},
 				{
-					"name": "delete/pessoa/16",
+					"name": "put/pessoa/16",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -230,17 +226,8 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": " {\r\n        \"idPessoa\": 16,\r\n        \"nome\": \"Rodrigo \",\r\n        \"dataNascimento\": \"1997-03-24\",\r\n        \"cpf\": \"8554794874\"\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "https://back-vemserdbc.herokuapp.com/pessoa/16",
+							"raw": "https://back-vemserdbc.herokuapp.com/pessoa",
 							"protocol": "https",
 							"host": [
 								"back-vemserdbc",
@@ -248,8 +235,7 @@
 								"com"
 							],
 							"path": [
-								"pessoa",
-								"16"
+								"pessoa"
 							]
 						}
 					},
