@@ -17,9 +17,10 @@ public class ContatoController {
     }
 
     @PostMapping("/{idPessoa}")
-    public Contato create (@RequestBody Contato contato){
+    public Contato create (@PathVariable("idPessoa") Integer idPessoa,
+            @RequestBody Contato contato){
 
-        return contatoService.create(contato);
+        return contatoService.create(contato, idPessoa);
     }
 
     @GetMapping
