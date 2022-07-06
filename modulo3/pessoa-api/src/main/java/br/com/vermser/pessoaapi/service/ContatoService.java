@@ -1,6 +1,7 @@
 package br.com.vermser.pessoaapi.service;
 
 import br.com.vermser.pessoaapi.entity.Contato;
+import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.repository.ContatoRepository;
 import br.com.vermser.pessoaapi.repository.PessoaRepository;
 
@@ -18,14 +19,14 @@ public class ContatoService {
         pessoaRepository = new PessoaRepository();
     }
 
-    public Contato create (Contato contato, Integer idPessoa){
+    public Contato create (Contato contato, Integer idPessoa) throws PessoaNaoCadastradaException {
         boolean pessoaCadastrada = pessoaRepository.list().stream()
                 .anyMatch(contato1 -> contato1.getIdPessoa().equals(idPessoa));
 
         if(pessoaCadastrada){
             return contatoRepository.create(contato);
         }else{
-            throw new NullPointerException();
+            throw new PessoaNaoCadastradaException("Não existe pessoa cadastrada com esse id");
         }
 
     }
