@@ -1,6 +1,7 @@
 package br.com.vermser.pessoaapi.controller;
 
 import br.com.vermser.pessoaapi.entity.Contato;
+import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.service.ContatoService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class ContatoController {
 
     @PostMapping("/{idPessoa}")
     public Contato create (@PathVariable("idPessoa") Integer idPessoa,
-            @RequestBody Contato contato){
+            @RequestBody Contato contato) throws PessoaNaoCadastradaException {
 
         return contatoService.create(contato, idPessoa);
     }

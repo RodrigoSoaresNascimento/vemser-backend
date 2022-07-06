@@ -24,6 +24,7 @@ public class ContatoService {
                 .anyMatch(contato1 -> contato1.getIdPessoa().equals(idPessoa));
 
         if(pessoaCadastrada){
+            contato.setIdPessoa(idPessoa);
             return contatoRepository.create(contato);
         }else{
             throw new PessoaNaoCadastradaException("Não existe pessoa cadastrada com esse id");
