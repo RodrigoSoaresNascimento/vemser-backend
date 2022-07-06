@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "22b8f81a-4790-44aa-ad59-b68a26a1d09c",
-		"name": "homework1_3",
+		"name": "homework2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "19466296"
 	},
@@ -107,24 +107,15 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": " {\r\n        \"idPessoa\": 12,\r\n        \"idContato\": 7,\r\n        \"numero\": \"(68) 4757-4187\",\r\n        \"descricao\": \"trabalho\",\r\n        \"tipoEndereco\": 1\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8080/contato/8",
+							"raw": "localhost:8080/contato/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"contato",
-								"8"
+								"2"
 							]
 						}
 					},
