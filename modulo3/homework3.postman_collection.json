@@ -11,7 +11,7 @@
 			"item": []
 		},
 		{
-			"name": "endereco/idEndereco",
+			"name": "endereco",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -29,38 +29,38 @@
 			"response": []
 		},
 		{
-			"name": "endereco/idEndereco/enderecoId/pessoa",
+			"name": "endereco/idEndereco",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/endereco/5",
+					"raw": "localhost:8080/endereco/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"endereco",
-						"5"
+						"1"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "endereco/idEndereco/enderecoId/pessoa",
+			"name": "endereco/idPessoa/pessoa",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/endereco/5/pessoa",
+					"raw": "localhost:8080/endereco/1/pessoa",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"endereco",
-						"5",
+						"1",
 						"pessoa"
 					]
 				}
@@ -68,7 +68,7 @@
 			"response": []
 		},
 		{
-			"name": "endereco/idEndereco/enderecoId",
+			"name": "endereco/idEndereco",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -96,7 +96,7 @@
 			"response": []
 		},
 		{
-			"name": "endereco/idEndereco/enderecoId",
+			"name": "endereco/idEndereco",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -115,7 +115,7 @@
 			"response": []
 		},
 		{
-			"name": "endereco/idEndereco/pessoaId",
+			"name": "endereco/idPessoa",
 			"request": {
 				"method": "POST",
 				"header": [],
