@@ -3,6 +3,7 @@ package br.com.vermser.pessoaapi.controller;
 import br.com.vermser.pessoaapi.entity.Contato;
 import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.service.ContatoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,12 +11,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/contato")
 public class ContatoController {
-
+    @Autowired
     private ContatoService contatoService;
 
-    public ContatoController (){
-        contatoService = new ContatoService();
-    }
+//    public ContatoController (){
+//        contatoService = new ContatoService();
+//    }
 
     @PostMapping("/{idPessoa}")
     public Contato create (@PathVariable("idPessoa") Integer idPessoa,

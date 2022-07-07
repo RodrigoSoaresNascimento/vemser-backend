@@ -4,19 +4,23 @@ import br.com.vermser.pessoaapi.entity.Contato;
 import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.repository.ContatoRepository;
 import br.com.vermser.pessoaapi.repository.PessoaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-
+@Service
 public class ContatoService {
 
+    @Autowired
     private ContatoRepository contatoRepository;
 
+    @Autowired
     private PessoaRepository pessoaRepository;
 
     public ContatoService (){
-        contatoRepository = new ContatoRepository();
-        pessoaRepository = new PessoaRepository();
+        //contatoRepository = new ContatoRepository();
+        //pessoaRepository = new PessoaRepository();
     }
 
     public Contato create (Contato contato, Integer idPessoa) throws PessoaNaoCadastradaException {

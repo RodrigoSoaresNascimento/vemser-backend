@@ -2,18 +2,17 @@ package br.com.vermser.pessoaapi.repository;
 
 import br.com.vermser.pessoaapi.entity.Contato;
 import br.com.vermser.pessoaapi.enums.TiposDeEndereco;
+import org.springframework.stereotype.Repository;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-
+@Repository
 public class ContatoRepository {
 
     private static List<Contato> listaContatos = new ArrayList<>();
-
-    private PessoaRepository pessoaRepository;
 
     private AtomicInteger COUNTER = new AtomicInteger();
 

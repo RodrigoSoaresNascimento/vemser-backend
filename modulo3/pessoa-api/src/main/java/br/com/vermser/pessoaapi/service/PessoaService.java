@@ -2,20 +2,33 @@ package br.com.vermser.pessoaapi.service;
 
 import br.com.vermser.pessoaapi.entity.Pessoa;
 import br.com.vermser.pessoaapi.repository.PessoaRepository;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class PessoaService {
 
+    @Autowired
     private PessoaRepository pessoaRepository;
 
-    public PessoaService (){
-        pessoaRepository = new PessoaRepository();
-    }
+//    public PessoaService (){
+//        //pessoaRepository = new PessoaRepository();
+//    }
 
     public Pessoa create (Pessoa pessoa){
-        return pessoaRepository.create(pessoa);
 
+        boolean pesssoaSemNome = StringUtils.isBlank(pessoa.getNome());
+        boolean pessoaSemData = ObjectUtils.isEmpty(pessoa.getDataNascimento());
+        boolean cpfValido = pessoa.getCpf().length() == 11;
+
+        if(!pesssoaSemNome && !pessoaSemData && !ObjectUtils.isEmpty(pessoa) && cpfValido){
+            return pessoaRepository.create(pessoa);
+        }
+
+        return pessoa;
     }
 
     public List<Pessoa> list (){

@@ -2,6 +2,7 @@ package br.com.vermser.pessoaapi.controller;
 
 import br.com.vermser.pessoaapi.entity.Pessoa;
 import br.com.vermser.pessoaapi.service.PessoaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,12 +10,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/pessoa")
 public class PessoaController {
-
+    @Autowired
     private PessoaService pessoaService;
-
-    public PessoaController() {
-        this.pessoaService = new PessoaService();
-    }
+//    public PessoaController() {
+//        this.pessoaService = new PessoaService();
+//    }
 
     @PostMapping("/{idPessoa}")
     public Pessoa create (@RequestBody Pessoa pessoa){
