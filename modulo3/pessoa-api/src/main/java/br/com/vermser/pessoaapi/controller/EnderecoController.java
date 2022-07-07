@@ -45,7 +45,7 @@ public class EnderecoController {
 
     @GetMapping("/{idPessoa}/pessoa")
     public  List<Endereco> listByPerson (@PathVariable("idPessoa") Integer id){
-        return enderecoService.listById(id);
+        return enderecoService.listByPerson(id);
     }
 
 }
