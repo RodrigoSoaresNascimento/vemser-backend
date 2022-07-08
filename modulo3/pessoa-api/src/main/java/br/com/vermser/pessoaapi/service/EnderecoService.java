@@ -23,10 +23,6 @@ public class EnderecoService {
 
     public Endereco create (Integer idPessoa, Endereco endereco) throws PessoaNaoCadastradaException {
 
-        boolean cepValido = endereco.getCep().length() == 9;
-
-        if(cepValido){
-
             boolean pessoaCadastrda = pessoaService.findById(idPessoa);
 
             if(pessoaCadastrda){
@@ -34,16 +30,11 @@ public class EnderecoService {
                 endereco.setIdEndereco(COUNTER.incrementAndGet());
                 enderecoRepository.list().add(endereco);
                 return endereco;
-            }else{
-                try {
-                    throw new PessoaNaoCadastradaException("Pessoa não cadastrada");
-                } catch (PessoaNaoCadastradaException e) {
-                    throw new RuntimeException(e);
-                }
+            }else try {
+                throw new PessoaNaoCadastradaException("Pessoa não cadastrada");
+            } catch (PessoaNaoCadastradaException e) {
+                throw new RuntimeException(e);
             }
-        }else {
-            throw new PessoaNaoCadastradaException("Informações incompletas retorne ao cadastro");
-        }
 
     }
 

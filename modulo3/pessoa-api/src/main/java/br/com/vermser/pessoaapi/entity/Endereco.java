@@ -2,6 +2,7 @@ package br.com.vermser.pessoaapi.entity;
 
 import br.com.vermser.pessoaapi.enums.TiposDeEndereco;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -10,7 +11,6 @@ public class Endereco {
     private Integer idPessoa;
     private Integer idEndereco;
 
-    @NotBlank(message = "Tipo de endereço is mandatory")
     @NotNull
     private TiposDeEndereco tipo;
 
@@ -20,7 +20,7 @@ public class Endereco {
     private String logradouro;
 
     @NotNull
-    @NotBlank(message = "Numero é obrigatorio")
+    @Min(1)
     private Integer numero;
     private String complemento;
 
