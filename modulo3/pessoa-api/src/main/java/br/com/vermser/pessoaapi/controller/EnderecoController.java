@@ -4,33 +4,37 @@ import br.com.vermser.pessoaapi.entity.Endereco;
 import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/endereco")
+@Validated
 public class EnderecoController {
 
     @Autowired
     private EnderecoService enderecoService;
 
     @PostMapping("/{idPessoa}")
-    public Endereco create (@PathVariable("idPessoa") Integer idPessoa,
-                            @RequestBody Endereco endereco) throws PessoaNaoCadastradaException {
+    public ResponseEntity<Endereco> create (@PathVariable("idPessoa") Integer idPessoa,
+                                           @RequestBody @Valid Endereco endereco) throws PessoaNaoCadastradaException {
 
-        return enderecoService.create(idPessoa,endereco);
+        return ResponseEntity.ok(enderecoService.create(idPessoa,endereco));
     }
 
     @GetMapping
-    public List<Endereco> list (){
-        return enderecoService.list();
+    public ResponseEntity<List<Endereco>> list (){
+         return ResponseEntity.ok(enderecoService.list());
     }
 
     @PutMapping("/{idEndereco}")
-    public Endereco update (@PathVariable("idEndereco") Integer id
-            ,@RequestBody Endereco endereco) throws Exception {
-        return enderecoService.update(id, endereco);
+    public ResponseEntity<Endereco> update (@PathVariable("idEndereco") Integer id
+            ,@RequestBody @Valid Endereco endereco) throws Exception {
+        return ResponseEntity.ok(enderecoService.update(id, endereco));
     }
 
     @DeleteMapping("/{idEndereco}")
@@ -39,13 +43,13 @@ public class EnderecoController {
     }
 
     @GetMapping("/{idEndereco}")
-    public  List<Endereco> listById (@PathVariable("idEndereco") Integer id){
-        return enderecoService.listById(id);
+    public  ResponseEntity<List<Endereco>> listById (@PathVariable("idEndereco") Integer id){
+        return ResponseEntity.ok(enderecoService.listById(id));
     }
 
     @GetMapping("/{idPessoa}/pessoa")
-    public  List<Endereco> listByPerson (@PathVariable("idPessoa") Integer id){
-        return enderecoService.listByPerson(id);
+    public  ResponseEntity<List<Endereco>> listByPerson (@PathVariable("idPessoa") Integer id){
+        return ResponseEntity.ok(enderecoService.listByPerson(id));
     }
 
 }

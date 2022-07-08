@@ -3,8 +3,6 @@ package br.com.vermser.pessoaapi.service;
 import br.com.vermser.pessoaapi.entity.Endereco;
 import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.repository.EnderecoRepository;
-import br.com.vermser.pessoaapi.repository.PessoaRepository;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +17,7 @@ public class EnderecoService {
     private EnderecoRepository enderecoRepository;
 
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private PessoaService pessoaService;
 
     private AtomicInteger COUNTER = new AtomicInteger();
 
@@ -29,8 +27,7 @@ public class EnderecoService {
 
         if(cepValido){
 
-            boolean pessoaCadastrda =  pessoaRepository.list().stream()
-                    .anyMatch(pessoa -> pessoa.getIdPessoa().equals(idPessoa));
+            boolean pessoaCadastrda = pessoaService.findById(idPessoa);
 
             if(pessoaCadastrda){
                 endereco.setIdPessoa(idPessoa);
@@ -55,11 +52,7 @@ public class EnderecoService {
     }
 
     public Endereco update (Integer id, Endereco enderecoAtualizar) throws Exception {
-        Endereco enderecoRecuperado = enderecoRepository.list()
-                .stream()
-                .filter(endereco1 -> endereco1.getIdEndereco().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
+        Endereco enderecoRecuperado = findById (id);
         enderecoRecuperado.setCep(enderecoAtualizar.getCep());
         enderecoRecuperado.setCidade(enderecoAtualizar.getCidade());
         enderecoRecuperado.setEstado(enderecoAtualizar.getEstado());
@@ -72,11 +65,7 @@ public class EnderecoService {
     }
 
     public void delete (Integer id) throws Exception {
-        Endereco enderecoRecuperado = enderecoRepository.list()
-                .stream()
-                .filter(endereco -> endereco.getIdEndereco().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Endereço não econtrado"));
+        Endereco enderecoRecuperado = findById(id);
         enderecoRepository.list().remove(enderecoRecuperado);
 
     }
@@ -91,6 +80,16 @@ public class EnderecoService {
         return enderecoRepository.list().stream()
                 .filter(endereco -> endereco.getIdPessoa().equals(id))
                 .collect(Collectors.toList());
+    }
+
+    public Endereco findById (Integer id) throws Exception {
+        Endereco enderecoRecuperado = enderecoRepository.list()
+                .stream()
+                .filter(endereco1 -> endereco1.getIdEndereco().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
+
+        return  enderecoRecuperado;
     }
 
 }

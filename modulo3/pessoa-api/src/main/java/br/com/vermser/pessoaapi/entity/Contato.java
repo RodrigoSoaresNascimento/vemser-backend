@@ -2,14 +2,22 @@ package br.com.vermser.pessoaapi.entity;
 
 import br.com.vermser.pessoaapi.enums.TiposDeEndereco;
 
-import java.time.LocalDate;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class Contato {
 
 
     private Integer idContato;
+    @NotBlank(message = "Numero is mandatory")
+    @NotNull
+    @Size(min = 13, max = 13)
     private String numero;
+
+    @NotNull
     private String descricao;
+    @NotNull
     private String tipoEndereco;
 
     private Integer idPessoa;

@@ -1,12 +1,26 @@
 package br.com.vermser.pessoaapi.entity;
 
+import org.hibernate.validator.constraints.br.CPF;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class Pessoa {
+
     private Integer idPessoa;
+    @Past
+    @NotNull
     private LocalDate dataNascimento;
+    @NotBlank(message = "Cpf is mandatory")
+    @NotNull
+    @Size(min = 11, max = 11)
     private String cpf;
+    @NotBlank(message = "Name is mandatory")
+    @NotNull
     private String nome;
 
     public Pessoa(Integer idPessoa, String nome, LocalDate dataNascimento, String cpf) {

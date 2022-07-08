@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
 @Service
 public class PessoaService {
 
@@ -17,18 +20,13 @@ public class PessoaService {
 //    public PessoaService (){
 //        //pessoaRepository = new PessoaRepository();
 //    }
+    private AtomicInteger COUNTER = new AtomicInteger();
 
     public Pessoa create (Pessoa pessoa){
 
-        boolean pesssoaSemNome = StringUtils.isBlank(pessoa.getNome());
-        boolean pessoaSemData = ObjectUtils.isEmpty(pessoa.getDataNascimento());
-        boolean cpfValido = pessoa.getCpf().length() == 11;
-
-        if(!pesssoaSemNome && !pessoaSemData && !ObjectUtils.isEmpty(pessoa) && cpfValido){
-            return pessoaRepository.create(pessoa);
-        }
-
-        return pessoa;
+            pessoa.setIdPessoa(COUNTER.incrementAndGet());
+            pessoaRepository.list().add(pessoa);
+            return pessoa;
     }
 
     public List<Pessoa> list (){
@@ -36,18 +34,31 @@ public class PessoaService {
     }
 
     public Pessoa update (Integer id
-    , Pessoa pessoa) throws Exception {
-       return pessoaRepository.update(id, pessoa);
+    , Pessoa pessoaAtualizar) throws Exception {
+
+        Pessoa pessoaRecuperada = pessoaRepository.findByid(id);
+        pessoaRecuperada.setIdPessoa(COUNTER.incrementAndGet());
+        pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
+        pessoaRecuperada.setNome(pessoaAtualizar.getNome());
+        pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
+        return pessoaRecuperada;
     }
 
     public void delete (Integer id) throws Exception {
-        pessoaRepository.delete(id);
+        Pessoa pessoaRecuperada = pessoaRepository.findByid(id);
+        pessoaRepository.list().remove(pessoaRecuperada);
+
     }
 
-    public  List<Pessoa> listByName (String nome){
-        return pessoaRepository.listByName(nome);
+    public List<Pessoa> listByName(String nome) {
+        return pessoaRepository.list().stream()
+                .filter(pessoa -> pessoa.getNome().toUpperCase().contains(nome.toUpperCase()))
+                .collect(Collectors.toList());
     }
 
-
+    public boolean findById (Integer idPessoa){
+        return pessoaRepository.list().stream()
+                .anyMatch(pessoa -> pessoa.getIdPessoa().equals(idPessoa));
+    }
 
 }

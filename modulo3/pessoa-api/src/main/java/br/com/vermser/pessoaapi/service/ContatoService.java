@@ -3,12 +3,14 @@ package br.com.vermser.pessoaapi.service;
 import br.com.vermser.pessoaapi.entity.Contato;
 import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.repository.ContatoRepository;
-import br.com.vermser.pessoaapi.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
 @Service
 public class ContatoService {
 
@@ -16,7 +18,9 @@ public class ContatoService {
     private ContatoRepository contatoRepository;
 
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private PessoaService pessoaService;
+
+    private AtomicInteger COUNTER = new AtomicInteger();
 
     public ContatoService (){
         //contatoRepository = new ContatoRepository();
@@ -24,12 +28,14 @@ public class ContatoService {
     }
 
     public Contato create (Contato contato, Integer idPessoa) throws PessoaNaoCadastradaException {
-        boolean pessoaCadastrada = pessoaRepository.list().stream()
-                .anyMatch(contato1 -> contato1.getIdPessoa().equals(idPessoa));
+
+        boolean pessoaCadastrada = pessoaService.findById(idPessoa);
 
         if(pessoaCadastrada){
             contato.setIdPessoa(idPessoa);
-            return contatoRepository.create(contato);
+            contato.setIdContato(COUNTER.incrementAndGet());
+            contatoRepository.list().add(contato);
+            return contato;
         }else{
             throw new PessoaNaoCadastradaException("Não existe pessoa cadastrada com esse id");
         }
@@ -41,16 +47,23 @@ public class ContatoService {
     }
 
     public Contato update (Integer id
-            , Contato contato) throws Exception {
-        return contatoRepository.update(id, contato);
+            , Contato contatoAtualizar) throws Exception {
+        Contato contatoRecuperado = contatoRepository.findByid(id);
+        contatoRecuperado.setNumero(contatoAtualizar.getNumero());
+        contatoRecuperado.setDescricao(contatoAtualizar.getDescricao());
+        contatoRecuperado.setTipoEndereco(contatoAtualizar.getTipoEndereco());
+        return contatoRecuperado;
     }
 
     public void delete (Integer id) throws Exception {
-        contatoRepository.delete(id);
+        Contato contatoRecuperado = contatoRepository.findByid(id);
+        contatoRepository.list().remove(contatoRecuperado);
     }
 
     public  List<Contato> listById (Integer id){
-        return contatoRepository.listById(id);
+        return contatoRepository.list().stream()
+                .filter(contato -> contato.getIdPessoa().equals(id))
+                .collect(Collectors.toList());
     }
 
 }

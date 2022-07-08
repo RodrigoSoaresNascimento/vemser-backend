@@ -26,42 +26,17 @@ public class ContatoRepository {
 
     }
 
-    public Contato create(Contato contato) {
-
-        contato.setIdContato(COUNTER.incrementAndGet());
-        listaContatos.add(contato);
-        return contato;
-
-    }
-
     public List<Contato> list() {
         return listaContatos;
     }
 
-    public Contato update(Integer id,
-                         Contato contatoAtualizar) throws Exception {
+
+    public Contato findByid(Integer id) throws Exception {
         Contato contatoRecuperado = listaContatos.stream()
                 .filter(contato -> contato.getIdContato().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new Exception("Contato não econtrada"));
-        contatoRecuperado.setNumero(contatoAtualizar.getNumero());
-        contatoRecuperado.setDescricao(contatoAtualizar.getDescricao());
-        contatoRecuperado.setTipoEndereco(contatoAtualizar.getTipoEndereco());
         return contatoRecuperado;
-    }
-
-    public void delete(Integer id) throws Exception {
-        Contato contatoRecuperado = listaContatos.stream()
-                .filter(contato -> contato.getIdContato().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Contato não econtrada"));
-        listaContatos.remove(contatoRecuperado);
-    }
-
-    public List<Contato> listById(Integer id) {
-        return listaContatos.stream()
-                .filter(contato -> contato.getIdPessoa().equals(id))
-                .collect(Collectors.toList());
     }
 
 }
