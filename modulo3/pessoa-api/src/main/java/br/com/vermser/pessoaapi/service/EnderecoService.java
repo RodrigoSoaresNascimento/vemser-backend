@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+
+import static br.com.vermser.pessoaapi.service.PessoaService.COUNTER;
 
 @Service
 public class EnderecoService {
@@ -19,7 +20,6 @@ public class EnderecoService {
     @Autowired
     private PessoaService pessoaService;
 
-    private AtomicInteger COUNTER = new AtomicInteger();
 
     public Endereco create (Integer idPessoa, Endereco endereco) throws PessoaNaoCadastradaException {
 

@@ -21,7 +21,7 @@ public class EnderecoController {
 
     @PostMapping("/{idPessoa}")
     public ResponseEntity<Endereco> create (@PathVariable("idPessoa") Integer idPessoa,
-                                           @RequestBody @Valid Endereco endereco) throws PessoaNaoCadastradaException {
+                                            @Valid @RequestBody Endereco endereco) throws PessoaNaoCadastradaException {
 
         return ResponseEntity.ok(enderecoService.create(idPessoa,endereco));
     }
@@ -33,7 +33,7 @@ public class EnderecoController {
 
     @PutMapping("/{idEndereco}")
     public ResponseEntity<Endereco> update (@PathVariable("idEndereco") Integer id
-            ,@RequestBody @Valid Endereco endereco) throws Exception {
+            , @Valid @RequestBody Endereco endereco) throws Exception {
         return ResponseEntity.ok(enderecoService.update(id, endereco));
     }
 

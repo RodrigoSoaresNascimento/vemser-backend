@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+
+import static br.com.vermser.pessoaapi.service.PessoaService.COUNTER;
 
 @Service
 public class ContatoService {
@@ -19,8 +20,6 @@ public class ContatoService {
 
     @Autowired
     private PessoaService pessoaService;
-
-    private AtomicInteger COUNTER = new AtomicInteger();
 
     public ContatoService (){
         //contatoRepository = new ContatoRepository();
@@ -48,7 +47,7 @@ public class ContatoService {
 
     public Contato update (Integer id
             , Contato contatoAtualizar) throws Exception {
-        Contato contatoRecuperado = contatoRepository.findByid(id);
+        Contato contatoRecuperado = findByid(id);
         contatoRecuperado.setNumero(contatoAtualizar.getNumero());
         contatoRecuperado.setDescricao(contatoAtualizar.getDescricao());
         contatoRecuperado.setTipoEndereco(contatoAtualizar.getTipoEndereco());
@@ -56,7 +55,7 @@ public class ContatoService {
     }
 
     public void delete (Integer id) throws Exception {
-        Contato contatoRecuperado = contatoRepository.findByid(id);
+        Contato contatoRecuperado = findByid(id);
         contatoRepository.list().remove(contatoRecuperado);
     }
 
@@ -64,6 +63,14 @@ public class ContatoService {
         return contatoRepository.list().stream()
                 .filter(contato -> contato.getIdPessoa().equals(id))
                 .collect(Collectors.toList());
+    }
+
+    public Contato findByid(Integer id) throws Exception {
+        Contato contatoRecuperado = contatoRepository.list().stream()
+                .filter(contato -> contato.getIdContato().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new Exception("Contato não econtrada"));
+        return contatoRecuperado;
     }
 
 }

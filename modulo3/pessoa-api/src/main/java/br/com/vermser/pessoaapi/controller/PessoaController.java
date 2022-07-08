@@ -20,8 +20,8 @@ public class PessoaController {
 //        this.pessoaService = new PessoaService();
 //    }
 
-    @PostMapping("/{idPessoa}")
-    public ResponseEntity<Pessoa> create (@RequestBody @Valid Pessoa pessoa){
+    @PostMapping
+    public ResponseEntity<Pessoa> create (@Valid @RequestBody Pessoa pessoa){
         return ResponseEntity.ok(pessoaService.create(pessoa));
 
     }
@@ -33,7 +33,7 @@ public class PessoaController {
 
     @PutMapping("/{idPessoa}")
     public ResponseEntity<Pessoa> update (@PathVariable("idPessoa") Integer id
-            ,@RequestBody @Valid Pessoa pessoa) throws Exception {
+            ,@Valid @RequestBody Pessoa pessoa) throws Exception {
         return ResponseEntity.ok(pessoaService.update(id, pessoa));
     }
 

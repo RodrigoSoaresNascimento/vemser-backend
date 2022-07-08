@@ -24,7 +24,7 @@ public class ContatoController {
 
     @PostMapping("/{idPessoa}")
     public ResponseEntity<Contato> create (@PathVariable("idPessoa") Integer idPessoa,
-                                  @RequestBody @Valid Contato contato) throws PessoaNaoCadastradaException {
+                                           @Valid @RequestBody Contato contato) throws PessoaNaoCadastradaException {
 
         return ResponseEntity.ok(contatoService.create(contato, idPessoa));
     }
@@ -36,7 +36,7 @@ public class ContatoController {
 
     @PutMapping("/{idContato}")
     public ResponseEntity<Contato> update (@PathVariable("idContato") Integer id
-            ,@RequestBody @Valid Contato contato) throws Exception {
+            ,@Valid @RequestBody Contato contato) throws Exception {
         return ResponseEntity.ok(contatoService.update(id, contato));
     }
 

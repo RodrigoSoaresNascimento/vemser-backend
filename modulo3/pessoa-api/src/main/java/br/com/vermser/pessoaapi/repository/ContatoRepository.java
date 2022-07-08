@@ -7,14 +7,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
+
+
+import static br.com.vermser.pessoaapi.service.PessoaService.COUNTER;
+
 @Repository
 public class ContatoRepository {
 
     private static List<Contato> listaContatos = new ArrayList<>();
 
-    private AtomicInteger COUNTER = new AtomicInteger();
 
     public ContatoRepository() {
 
@@ -28,15 +29,6 @@ public class ContatoRepository {
 
     public List<Contato> list() {
         return listaContatos;
-    }
-
-
-    public Contato findByid(Integer id) throws Exception {
-        Contato contatoRecuperado = listaContatos.stream()
-                .filter(contato -> contato.getIdContato().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Contato não econtrada"));
-        return contatoRecuperado;
     }
 
 }

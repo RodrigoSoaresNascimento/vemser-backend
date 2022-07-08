@@ -7,13 +7,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
+
 
 @Repository
 public class PessoaRepository {
     private static List<Pessoa> listaPessoas = new ArrayList<>();
-    private AtomicInteger COUNTER = new AtomicInteger();
 
     public PessoaRepository() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); //18/10/2020
@@ -24,18 +22,8 @@ public class PessoaRepository {
         listaPessoas.add(new Pessoa(5, "Ana", LocalDate.parse("01/07/1990", formatter), "12345678917"));
     }
 
-
     public List<Pessoa> list() {
         return listaPessoas;
-    }
-
-
-    public Pessoa findByid(Integer id) throws Exception {
-        Pessoa pessoaRecuperada = listaPessoas.stream()
-                .filter(pessoa -> pessoa.getIdPessoa().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
-        return pessoaRecuperada;
     }
 
 }

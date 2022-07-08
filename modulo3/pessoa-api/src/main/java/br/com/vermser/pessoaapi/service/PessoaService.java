@@ -20,7 +20,7 @@ public class PessoaService {
 //    public PessoaService (){
 //        //pessoaRepository = new PessoaRepository();
 //    }
-    private AtomicInteger COUNTER = new AtomicInteger();
+    public static AtomicInteger COUNTER = new AtomicInteger();
 
     public Pessoa create (Pessoa pessoa){
 
@@ -36,7 +36,7 @@ public class PessoaService {
     public Pessoa update (Integer id
     , Pessoa pessoaAtualizar) throws Exception {
 
-        Pessoa pessoaRecuperada = pessoaRepository.findByid(id);
+        Pessoa pessoaRecuperada = findByid(id);
         pessoaRecuperada.setIdPessoa(COUNTER.incrementAndGet());
         pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
         pessoaRecuperada.setNome(pessoaAtualizar.getNome());
@@ -45,7 +45,7 @@ public class PessoaService {
     }
 
     public void delete (Integer id) throws Exception {
-        Pessoa pessoaRecuperada = pessoaRepository.findByid(id);
+        Pessoa pessoaRecuperada = findByid(id);
         pessoaRepository.list().remove(pessoaRecuperada);
 
     }
@@ -59,6 +59,14 @@ public class PessoaService {
     public boolean findById (Integer idPessoa){
         return pessoaRepository.list().stream()
                 .anyMatch(pessoa -> pessoa.getIdPessoa().equals(idPessoa));
+    }
+
+    public Pessoa findByid (Integer id) throws Exception {
+        Pessoa pessoaRecuperada = pessoaRepository.list().stream()
+                .filter(pessoa -> pessoa.getIdPessoa().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
+        return pessoaRecuperada;
     }
 
 }
