@@ -7,15 +7,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
-import static br.com.vermser.pessoaapi.service.PessoaService.COUNTER;
 
 @Repository
 public class ContatoRepository {
 
     private static List<Contato> listaContatos = new ArrayList<>();
 
+    private AtomicInteger COUNTER = new AtomicInteger();
 
     public ContatoRepository() {
 
@@ -29,6 +30,12 @@ public class ContatoRepository {
 
     public List<Contato> list() {
         return listaContatos;
+    }
+
+    public Contato create (Contato contato){
+        contato.setIdContato(COUNTER.incrementAndGet());
+        listaContatos.add(contato);
+        return  contato;
     }
 
 }

@@ -6,6 +6,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 public class Endereco {
     private Integer idPessoa;
@@ -34,10 +35,10 @@ public class Endereco {
     @Size(max = 250)
     private String cidade;
 
-    @NotNull
+    @NotBlank(message = "Estado é obrigatorio")
     private String estado;
 
-    @NotNull
+    @NotBlank(message = "Pais é obrigatorio")
     private String pais;
 
     public Endereco(Integer idPessoa, Integer idEndereco ,TiposDeEndereco tipo, String logradouro, Integer numero, String complemento, String cep, String cidade, String estado, String pais) {
@@ -151,5 +152,18 @@ public class Endereco {
                 ", estado = '" + estado + '\'' +
                 ", pais = '" + pais + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Endereco)) return false;
+        Endereco endereco = (Endereco) o;
+        return Objects.equals(idPessoa, endereco.idPessoa) && Objects.equals(idEndereco, endereco.idEndereco);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idPessoa, idEndereco);
     }
 }

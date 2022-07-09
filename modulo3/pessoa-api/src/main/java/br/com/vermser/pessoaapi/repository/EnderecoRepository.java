@@ -6,12 +6,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import static br.com.vermser.pessoaapi.service.PessoaService.COUNTER;
 
 @Repository
 public class EnderecoRepository {
 
+    private AtomicInteger COUNTER = new AtomicInteger();
     private static List<Endereco> listaEnderecos = new ArrayList<>();
 
 
@@ -28,5 +29,13 @@ public class EnderecoRepository {
     public List<Endereco> list () {
         return listaEnderecos;
     }
+
+    public Endereco create (Endereco endereco){
+        endereco.setIdEndereco(COUNTER.incrementAndGet());
+        listaEnderecos.add(endereco);
+        return endereco;
+    }
+
+
 
 }

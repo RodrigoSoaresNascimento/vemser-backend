@@ -1,6 +1,6 @@
 package br.com.vermser.pessoaapi.controller;
 
-import br.com.vermser.pessoaapi.entity.Pessoa;
+import br.com.vermser.pessoaapi.dto.PessoaDTO;
 import br.com.vermser.pessoaapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,19 +21,19 @@ public class PessoaController {
 //    }
 
     @PostMapping
-    public ResponseEntity<Pessoa> create (@Valid @RequestBody Pessoa pessoa){
+    public ResponseEntity<PessoaDTO> create (@Valid @RequestBody PessoaDTO pessoa){
         return ResponseEntity.ok(pessoaService.create(pessoa));
 
     }
 
     @GetMapping
-    public ResponseEntity<List<Pessoa>> list (){
+    public ResponseEntity<List<PessoaDTO>> list (){
         return ResponseEntity.ok(pessoaService.list());
     }
 
     @PutMapping("/{idPessoa}")
-    public ResponseEntity<Pessoa> update (@PathVariable("idPessoa") Integer id
-            ,@Valid @RequestBody Pessoa pessoa) throws Exception {
+    public ResponseEntity<PessoaDTO> update (@PathVariable("idPessoa") Integer id
+            ,@Valid @RequestBody PessoaDTO pessoa) throws Exception {
         return ResponseEntity.ok(pessoaService.update(id, pessoa));
     }
 
@@ -43,7 +43,7 @@ public class PessoaController {
     }
 
     @GetMapping("/byname")
-    public  ResponseEntity<List<Pessoa>> listByName (@RequestParam("nome=") String nome){
+    public  ResponseEntity<List<PessoaDTO>> listByName (@RequestParam("nome=") String nome){
         return ResponseEntity.ok(pessoaService.listByName(nome));
     }
 

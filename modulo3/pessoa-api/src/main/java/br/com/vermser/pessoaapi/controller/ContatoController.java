@@ -1,6 +1,6 @@
 package br.com.vermser.pessoaapi.controller;
 
-import br.com.vermser.pessoaapi.entity.Contato;
+import br.com.vermser.pessoaapi.dto.ContatoDTO;
 import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.service.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,20 +23,20 @@ public class ContatoController {
 //    }
 
     @PostMapping("/{idPessoa}")
-    public ResponseEntity<Contato> create (@PathVariable("idPessoa") Integer idPessoa,
-                                           @Valid @RequestBody Contato contato) throws PessoaNaoCadastradaException {
+    public ResponseEntity<ContatoDTO> create (@PathVariable("idPessoa") Integer idPessoa,
+                                           @Valid @RequestBody ContatoDTO contato) throws PessoaNaoCadastradaException {
 
         return ResponseEntity.ok(contatoService.create(contato, idPessoa));
     }
 
     @GetMapping
-    public ResponseEntity<List<Contato>> list (){
+    public ResponseEntity<List<ContatoDTO>> list (){
         return ResponseEntity.ok(contatoService.list());
     }
 
     @PutMapping("/{idContato}")
-    public ResponseEntity<Contato> update (@PathVariable("idContato") Integer id
-            ,@Valid @RequestBody Contato contato) throws Exception {
+    public ResponseEntity<ContatoDTO> update (@PathVariable("idContato") Integer id
+            ,@Valid @RequestBody ContatoDTO contato) throws Exception {
         return ResponseEntity.ok(contatoService.update(id, contato));
     }
 
@@ -46,7 +46,7 @@ public class ContatoController {
     }
 
     @GetMapping("/{idPessoa}")
-    public  ResponseEntity<List<Contato>> listById (@PathVariable("idPessoa") Integer id){
+    public  ResponseEntity<List<ContatoDTO>> listById (@PathVariable("idPessoa") Integer id){
         return ResponseEntity.ok(contatoService.listById(id));
     }
 

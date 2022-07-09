@@ -1,71 +1,79 @@
 package br.com.vermser.pessoaapi.service;
 
+import br.com.vermser.pessoaapi.dto.PessoaCreateDTO;
+import br.com.vermser.pessoaapi.dto.PessoaDTO;
 import br.com.vermser.pessoaapi.entity.Pessoa;
+import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.repository.PessoaRepository;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class PessoaService {
 
     @Autowired
     private PessoaRepository pessoaRepository;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
 //    public PessoaService (){
 //        //pessoaRepository = new PessoaRepository();
 //    }
-    public static AtomicInteger COUNTER = new AtomicInteger();
 
-    public Pessoa create (Pessoa pessoa){
+    public PessoaDTO create (PessoaCreateDTO pessoa) {
 
-            pessoa.setIdPessoa(COUNTER.incrementAndGet());
-            pessoaRepository.list().add(pessoa);
-            return pessoa;
+        Pessoa pessoaEntity = objectMapper.convertValue(pessoa, Pessoa.class);
+        pessoaEntity = pessoaRepository.create(pessoaEntity);
+        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaDTO.class);
+        log.info("Pessoa criada");
+        return pessoaDTO;
     }
 
-    public List<Pessoa> list (){
-        return pessoaRepository.list();
+    public List<PessoaDTO> list (){
+        return pessoaRepository.list()
+                .stream()
+                .map(p -> objectMapper.convertValue(p,PessoaDTO.class))
+                .collect(Collectors.toList());
     }
 
-    public Pessoa update (Integer id
-    , Pessoa pessoaAtualizar) throws Exception {
+    public PessoaDTO update (Integer id
+    , PessoaCreateDTO pessoaAtualizar) throws Exception {
 
-        Pessoa pessoaRecuperada = findByid(id);
-        pessoaRecuperada.setIdPessoa(COUNTER.incrementAndGet());
+        Pessoa pessoaRecuperada = findById(id);
+        pessoaRecuperada.setIdPessoa(id);
         pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
         pessoaRecuperada.setNome(pessoaAtualizar.getNome());
         pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
-        return pessoaRecuperada;
+        log.info("Pessoa atualizada");
+        return objectMapper.convertValue(pessoaRecuperada, PessoaDTO.class);
     }
 
     public void delete (Integer id) throws Exception {
-        Pessoa pessoaRecuperada = findByid(id);
+        Pessoa pessoaRecuperada = findById(id);
+        log.info("Pessoa removida!");
         pessoaRepository.list().remove(pessoaRecuperada);
 
     }
 
-    public List<Pessoa> listByName(String nome) {
+    public List<PessoaDTO> listByName(String nome) {
         return pessoaRepository.list().stream()
+                .map(p -> objectMapper.convertValue(p, PessoaDTO.class))
                 .filter(pessoa -> pessoa.getNome().toUpperCase().contains(nome.toUpperCase()))
                 .collect(Collectors.toList());
     }
 
-    public boolean findById (Integer idPessoa){
-        return pessoaRepository.list().stream()
-                .anyMatch(pessoa -> pessoa.getIdPessoa().equals(idPessoa));
-    }
-
-    public Pessoa findByid (Integer id) throws Exception {
+    public Pessoa findById (Integer id) throws PessoaNaoCadastradaException {
         Pessoa pessoaRecuperada = pessoaRepository.list().stream()
                 .filter(pessoa -> pessoa.getIdPessoa().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
+                .orElseThrow(() -> new PessoaNaoCadastradaException("Pessoa não econtrada"));
         return pessoaRecuperada;
     }
 

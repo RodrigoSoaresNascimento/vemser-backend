@@ -1,6 +1,6 @@
 package br.com.vermser.pessoaapi.entity;
 
-import org.hibernate.validator.constraints.br.CPF;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -9,6 +9,11 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Pessoa {
 
     private Integer idPessoa;
@@ -30,42 +35,6 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public Pessoa(Integer idPessoa){
-        this.idPessoa = idPessoa;
-    }
-
-    public Integer getIdPessoa() {
-        return idPessoa;
-    }
-
-    public void setIdPessoa(Integer idPessoa) {
-        this.idPessoa = idPessoa;
-    }
-
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     @Override
     public String toString() {
         return "Pessoa " +
@@ -76,16 +45,4 @@ public class Pessoa {
 
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Pessoa)) return false;
-        Pessoa pessoa = (Pessoa) o;
-        return idPessoa.equals(pessoa.idPessoa) && Objects.equals(dataNascimento, pessoa.dataNascimento) && Objects.equals(cpf, pessoa.cpf) && Objects.equals(nome, pessoa.nome);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idPessoa, dataNascimento, cpf, nome);
-    }
 }

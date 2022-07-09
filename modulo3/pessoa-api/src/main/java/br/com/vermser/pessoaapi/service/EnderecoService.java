@@ -1,17 +1,21 @@
 package br.com.vermser.pessoaapi.service;
 
+import br.com.vermser.pessoaapi.dto.EnderecoCreateDTO;
+import br.com.vermser.pessoaapi.dto.EnderecoDTO;
 import br.com.vermser.pessoaapi.entity.Endereco;
+import br.com.vermser.pessoaapi.entity.Pessoa;
 import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.repository.EnderecoRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static br.com.vermser.pessoaapi.service.PessoaService.COUNTER;
-
 @Service
+@Slf4j
 public class EnderecoService {
 
     @Autowired
@@ -20,30 +24,30 @@ public class EnderecoService {
     @Autowired
     private PessoaService pessoaService;
 
+    @Autowired
+    private ObjectMapper objectMapper;
 
-    public Endereco create (Integer idPessoa, Endereco endereco) throws PessoaNaoCadastradaException {
+    public EnderecoDTO create (Integer idPessoa, EnderecoCreateDTO endereco) throws PessoaNaoCadastradaException {
 
-            boolean pessoaCadastrda = pessoaService.findById(idPessoa);
-
-            if(pessoaCadastrda){
-                endereco.setIdPessoa(idPessoa);
-                endereco.setIdEndereco(COUNTER.incrementAndGet());
-                enderecoRepository.list().add(endereco);
-                return endereco;
-            }else try {
-                throw new PessoaNaoCadastradaException("Pessoa não cadastrada");
-            } catch (PessoaNaoCadastradaException e) {
-                throw new RuntimeException(e);
-            }
+        Pessoa pessoaCadastrada = pessoaService.findById(idPessoa);
+        Endereco enderecoCriado = objectMapper.convertValue(endereco, Endereco.class);
+        enderecoCriado.setIdPessoa(idPessoa);
+        enderecoRepository.create(enderecoCriado);
+        log.info("Endereço criado");
+        return objectMapper.convertValue(enderecoCriado, EnderecoDTO.class);
 
     }
 
-    public List<Endereco> list () {
-        return enderecoRepository.list();
+    public List<EnderecoDTO> list () {
+        return enderecoRepository.list()
+                .stream()
+                .map(e -> objectMapper.convertValue(e, EnderecoDTO.class))
+                .collect(Collectors.toList());
     }
 
-    public Endereco update (Integer id, Endereco enderecoAtualizar) throws Exception {
-        Endereco enderecoRecuperado = findById (id);
+    public EnderecoDTO update (Integer id, EnderecoCreateDTO enderecoAtualizar) throws Exception {
+
+        Endereco enderecoRecuperado = findById(id);
         enderecoRecuperado.setCep(enderecoAtualizar.getCep());
         enderecoRecuperado.setCidade(enderecoAtualizar.getCidade());
         enderecoRecuperado.setEstado(enderecoAtualizar.getEstado());
@@ -52,35 +56,37 @@ public class EnderecoService {
         enderecoRecuperado.setLogradouro(enderecoAtualizar.getLogradouro());
         enderecoRecuperado.setTipo(enderecoAtualizar.getTipo());
         enderecoRecuperado.setPais(enderecoAtualizar.getPais());
-        return enderecoRecuperado;
+        log.info("Endereço atualizado");
+        return objectMapper.convertValue(enderecoRecuperado,EnderecoDTO.class);
     }
 
     public void delete (Integer id) throws Exception {
         Endereco enderecoRecuperado = findById(id);
         enderecoRepository.list().remove(enderecoRecuperado);
+        log.info("Endereço deletado");
 
     }
 
-    public List<Endereco> listById (Integer id){
+    public List<EnderecoDTO> listById (Integer id){
         return enderecoRepository.list().stream()
+                .map(e -> objectMapper.convertValue(e, EnderecoDTO.class))
                 .filter(endereco -> endereco.getIdEndereco().equals(id))
                 .collect(Collectors.toList());
     }
 
-    public List<Endereco> listByPerson (Integer id){
+    public List<EnderecoDTO> listByPerson (Integer id){
         return enderecoRepository.list().stream()
+                .map(e -> objectMapper.convertValue(e, EnderecoDTO.class))
                 .filter(endereco -> endereco.getIdPessoa().equals(id))
                 .collect(Collectors.toList());
     }
 
-    public Endereco findById (Integer id) throws Exception {
-        Endereco enderecoRecuperado = enderecoRepository.list()
+    public Endereco findById (Integer id) throws PessoaNaoCadastradaException {
+        return enderecoRepository.list()
                 .stream()
                 .filter(endereco1 -> endereco1.getIdEndereco().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
-
-        return  enderecoRecuperado;
+                .orElseThrow(() -> new PessoaNaoCadastradaException("Endereço não encontrado"));
     }
 
 }

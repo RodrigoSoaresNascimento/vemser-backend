@@ -1,11 +1,13 @@
 package br.com.vermser.pessoaapi.entity;
 
 import br.com.vermser.pessoaapi.enums.TiposDeEndereco;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@EqualsAndHashCode
 public class Contato {
 
 
@@ -28,6 +30,10 @@ public class Contato {
         this.numero = numero;
         this.descricao = descricao;
         this.tipoEndereco = tipoEndereco;
+    }
+
+    public Contato () {
+
     }
 
     public Integer getIdContato() {
