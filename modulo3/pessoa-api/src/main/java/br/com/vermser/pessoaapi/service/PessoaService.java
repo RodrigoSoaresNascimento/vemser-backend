@@ -23,15 +23,19 @@ public class PessoaService {
     @Autowired
     private ObjectMapper objectMapper;
 
-//    public PessoaService (){
-//        //pessoaRepository = new PessoaRepository();
-//    }
+    public Pessoa converterPessoaDTO (PessoaCreateDTO pessoaDTO) {
+        return objectMapper.convertValue(pessoaDTO, Pessoa.class);
+    }
+
+    public PessoaDTO converterPessoa (Pessoa pessoa){
+        return objectMapper.convertValue(pessoa, PessoaDTO.class);
+    }
 
     public PessoaDTO create (PessoaCreateDTO pessoa) {
 
-        Pessoa pessoaEntity = objectMapper.convertValue(pessoa, Pessoa.class);
+        Pessoa pessoaEntity = converterPessoaDTO(pessoa);
         pessoaEntity = pessoaRepository.create(pessoaEntity);
-        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaDTO.class);
+        PessoaDTO pessoaDTO = converterPessoa(pessoaEntity);
         log.info("Pessoa criada");
         return pessoaDTO;
     }
@@ -39,7 +43,7 @@ public class PessoaService {
     public List<PessoaDTO> list (){
         return pessoaRepository.list()
                 .stream()
-                .map(p -> objectMapper.convertValue(p,PessoaDTO.class))
+                .map(this::converterPessoa)
                 .collect(Collectors.toList());
     }
 
@@ -52,7 +56,7 @@ public class PessoaService {
         pessoaRecuperada.setNome(pessoaAtualizar.getNome());
         pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
         log.info("Pessoa atualizada");
-        return objectMapper.convertValue(pessoaRecuperada, PessoaDTO.class);
+        return converterPessoa(pessoaRecuperada);
     }
 
     public void delete (Integer id) throws Exception {
@@ -64,7 +68,7 @@ public class PessoaService {
 
     public List<PessoaDTO> listByName(String nome) {
         return pessoaRepository.list().stream()
-                .map(p -> objectMapper.convertValue(p, PessoaDTO.class))
+                .map(this::converterPessoa)
                 .filter(pessoa -> pessoa.getNome().toUpperCase().contains(nome.toUpperCase()))
                 .collect(Collectors.toList());
     }

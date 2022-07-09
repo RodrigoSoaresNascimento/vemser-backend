@@ -27,21 +27,29 @@ public class EnderecoService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    public Endereco converterEnderecoDTO (EnderecoCreateDTO enderecoCreateDTO){
+        return objectMapper.convertValue(enderecoCreateDTO, Endereco.class);
+    }
+
+    public EnderecoDTO converterEndereco (Endereco endereco){
+        return objectMapper.convertValue(endereco, EnderecoDTO.class);
+    }
+
     public EnderecoDTO create (Integer idPessoa, EnderecoCreateDTO endereco) throws PessoaNaoCadastradaException {
 
         Pessoa pessoaCadastrada = pessoaService.findById(idPessoa);
-        Endereco enderecoCriado = objectMapper.convertValue(endereco, Endereco.class);
-        enderecoCriado.setIdPessoa(idPessoa);
-        enderecoRepository.create(enderecoCriado);
+        Endereco enderecoEntity = converterEnderecoDTO(endereco);
+        enderecoEntity.setIdPessoa(idPessoa);
+        enderecoRepository.create(enderecoEntity);
         log.info("Endereço criado");
-        return objectMapper.convertValue(enderecoCriado, EnderecoDTO.class);
+        return converterEndereco(enderecoEntity);
 
     }
 
     public List<EnderecoDTO> list () {
         return enderecoRepository.list()
                 .stream()
-                .map(e -> objectMapper.convertValue(e, EnderecoDTO.class))
+                .map(this::converterEndereco)
                 .collect(Collectors.toList());
     }
 
@@ -57,7 +65,7 @@ public class EnderecoService {
         enderecoRecuperado.setTipo(enderecoAtualizar.getTipo());
         enderecoRecuperado.setPais(enderecoAtualizar.getPais());
         log.info("Endereço atualizado");
-        return objectMapper.convertValue(enderecoRecuperado,EnderecoDTO.class);
+        return converterEndereco(enderecoRecuperado);
     }
 
     public void delete (Integer id) throws Exception {
@@ -69,14 +77,14 @@ public class EnderecoService {
 
     public List<EnderecoDTO> listById (Integer id){
         return enderecoRepository.list().stream()
-                .map(e -> objectMapper.convertValue(e, EnderecoDTO.class))
+                .map(this::converterEndereco)
                 .filter(endereco -> endereco.getIdEndereco().equals(id))
                 .collect(Collectors.toList());
     }
 
     public List<EnderecoDTO> listByPerson (Integer id){
         return enderecoRepository.list().stream()
-                .map(e -> objectMapper.convertValue(e, EnderecoDTO.class))
+                .map(this::converterEndereco)
                 .filter(endereco -> endereco.getIdPessoa().equals(id))
                 .collect(Collectors.toList());
     }

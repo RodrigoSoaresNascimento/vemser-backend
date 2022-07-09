@@ -29,26 +29,29 @@ public class ContatoService {
     @Autowired
     private ObjectMapper objectMapper;
 
-    public ContatoService (){
-        //contatoRepository = new ContatoRepository();
-        //pessoaRepository = new PessoaRepository();
+    public Contato converterContatoDTO (ContatoCreateDTO contatoCreateDTO){
+       return objectMapper.convertValue(contatoCreateDTO, Contato.class);
+    }
+
+    public ContatoDTO converterContato (Contato contato){
+        return objectMapper.convertValue(contato, ContatoDTO.class);
     }
 
     public ContatoDTO create (ContatoCreateDTO contato, Integer idPessoa) throws PessoaNaoCadastradaException {
 
         Pessoa pessoaCadastrada = pessoaService.findById(idPessoa);
-        Contato contato1 = objectMapper.convertValue(contato, Contato.class);
-        contato1.setIdPessoa(idPessoa);
-        contatoRepository.create(contato1);
+        Contato contatoEntity = converterContatoDTO(contato);
+        contatoEntity.setIdPessoa(idPessoa);
+        contatoRepository.create(contatoEntity);
         log.info("Contato criado");
-        return objectMapper.convertValue(contato1, ContatoDTO.class);
+        return converterContato(contatoEntity);
 
     }
 
     public List<ContatoDTO> list (){
         return contatoRepository.list()
                 .stream()
-                .map(c -> objectMapper.convertValue(c, ContatoDTO.class))
+                .map(this::converterContato)
                 .collect(Collectors.toList());
     }
 
@@ -59,7 +62,7 @@ public class ContatoService {
         contatoRecuperado.setDescricao(contatoAtualizar.getDescricao());
         contatoRecuperado.setTipoEndereco(contatoAtualizar.getTipoEndereco());
         log.info("Contato Atualizado");
-        return objectMapper.convertValue(contatoRecuperado, ContatoDTO.class);
+        return converterContato(contatoRecuperado);
     }
 
     public void delete (Integer id) throws Exception {
@@ -70,7 +73,7 @@ public class ContatoService {
 
     public  List<ContatoDTO> listById (Integer id){
         return contatoRepository.list().stream()
-                .map(c -> objectMapper.convertValue(c, ContatoDTO.class))
+                .map(this::converterContato)
                 .filter(contato -> contato.getIdPessoa().equals(id))
                 .collect(Collectors.toList());
     }

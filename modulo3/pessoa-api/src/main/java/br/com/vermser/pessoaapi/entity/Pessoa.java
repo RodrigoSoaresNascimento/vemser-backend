@@ -2,12 +2,8 @@ package br.com.vermser.pessoaapi.entity;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
