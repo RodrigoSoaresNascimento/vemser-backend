@@ -20,4 +20,6 @@ public class ContatoCreateDTO {
     private String descricao;
     @NotNull
     private String tipoEndereco;
+
+    private Integer idPessoa;
 }

@@ -10,5 +10,4 @@ import lombok.*;
 public class ContatoDTO extends ContatoCreateDTO {
 
     private Integer idContato;
-    private Integer idPessoa;
 }

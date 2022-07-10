@@ -12,7 +12,10 @@ import javax.validation.constraints.*;
 @ToString
 public class EnderecoCreateDTO {
 
+    @NotNull
     private TiposDeEndereco tipo;
+
+    private Integer idPessoa;
 
     @NotNull
     @NotBlank(message = "Logradouro é obrigatório")

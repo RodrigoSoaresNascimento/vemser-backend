@@ -1,5 +1,6 @@
 package br.com.vermser.pessoaapi.controller;
 
+import br.com.vermser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vermser.pessoaapi.dto.PessoaDTO;
 import br.com.vermser.pessoaapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class PessoaController {
 //    }
 
     @PostMapping
-    public ResponseEntity<PessoaDTO> create (@Valid @RequestBody PessoaDTO pessoa){
+    public ResponseEntity<PessoaDTO> create (@Valid @RequestBody PessoaCreateDTO pessoa){
         return ResponseEntity.ok(pessoaService.create(pessoa));
 
     }

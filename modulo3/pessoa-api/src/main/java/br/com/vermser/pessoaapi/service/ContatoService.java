@@ -51,7 +51,7 @@ public class ContatoService {
     public List<ContatoDTO> list (){
         return contatoRepository.list()
                 .stream()
-                .map(this::converterContato)
+                .map(c -> objectMapper.convertValue(c, ContatoDTO.class))
                 .collect(Collectors.toList());
     }
 

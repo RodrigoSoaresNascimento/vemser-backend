@@ -1,5 +1,6 @@
 package br.com.vermser.pessoaapi.controller;
 
+import br.com.vermser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.vermser.pessoaapi.dto.EnderecoDTO;
 import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.service.EnderecoService;
@@ -21,7 +22,7 @@ public class EnderecoController {
 
     @PostMapping("/{idPessoa}")
     public ResponseEntity<EnderecoDTO> create (@PathVariable("idPessoa") Integer idPessoa,
-                                               @Valid @RequestBody EnderecoDTO endereco) throws PessoaNaoCadastradaException {
+                                               @Valid @RequestBody EnderecoCreateDTO endereco) throws PessoaNaoCadastradaException {
 
         return ResponseEntity.ok(enderecoService.create(idPessoa,endereco));
     }

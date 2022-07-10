@@ -9,7 +9,6 @@ import lombok.*;
 @ToString
 public class EnderecoDTO extends EnderecoCreateDTO{
 
-    private Integer idPessoa;
     private Integer idEndereco;
 
 }

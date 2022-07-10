@@ -68,8 +68,8 @@ public class PessoaService {
 
     public List<PessoaDTO> listByName(String nome) {
         return pessoaRepository.list().stream()
-                .map(this::converterPessoa)
                 .filter(pessoa -> pessoa.getNome().toUpperCase().contains(nome.toUpperCase()))
+                .map(this::converterPessoa)
                 .collect(Collectors.toList());
     }
 

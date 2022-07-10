@@ -1,5 +1,6 @@
 package br.com.vermser.pessoaapi.controller;
 
+import br.com.vermser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.vermser.pessoaapi.dto.ContatoDTO;
 import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.service.ContatoService;
@@ -24,7 +25,7 @@ public class ContatoController {
 
     @PostMapping("/{idPessoa}")
     public ResponseEntity<ContatoDTO> create (@PathVariable("idPessoa") Integer idPessoa,
-                                           @Valid @RequestBody ContatoDTO contato) throws PessoaNaoCadastradaException {
+                                           @Valid @RequestBody ContatoCreateDTO contato) throws PessoaNaoCadastradaException {
 
         return ResponseEntity.ok(contatoService.create(contato, idPessoa));
     }
