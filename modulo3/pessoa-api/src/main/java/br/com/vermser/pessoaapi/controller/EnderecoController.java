@@ -34,7 +34,7 @@ public class EnderecoController {
 
     @PutMapping("/{idEndereco}")
     public ResponseEntity<EnderecoDTO> update (@PathVariable("idEndereco") Integer id
-            , @Valid @RequestBody EnderecoDTO endereco) throws Exception {
+            , @Valid @RequestBody EnderecoCreateDTO endereco) throws Exception {
         return ResponseEntity.ok(enderecoService.update(id, endereco));
     }
 

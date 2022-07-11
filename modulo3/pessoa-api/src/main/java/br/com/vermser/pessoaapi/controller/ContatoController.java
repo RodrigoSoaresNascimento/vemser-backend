@@ -37,7 +37,7 @@ public class ContatoController {
 
     @PutMapping("/{idContato}")
     public ResponseEntity<ContatoDTO> update (@PathVariable("idContato") Integer id
-            ,@Valid @RequestBody ContatoDTO contato) throws Exception {
+            ,@Valid @RequestBody ContatoCreateDTO contato) throws Exception {
         return ResponseEntity.ok(contatoService.update(id, contato));
     }
 

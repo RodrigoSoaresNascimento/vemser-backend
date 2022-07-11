@@ -34,7 +34,7 @@ public class PessoaController {
 
     @PutMapping("/{idPessoa}")
     public ResponseEntity<PessoaDTO> update (@PathVariable("idPessoa") Integer id
-            ,@Valid @RequestBody PessoaDTO pessoa) throws Exception {
+            ,@Valid @RequestBody PessoaCreateDTO pessoa) throws Exception {
         return ResponseEntity.ok(pessoaService.update(id, pessoa));
     }
 
