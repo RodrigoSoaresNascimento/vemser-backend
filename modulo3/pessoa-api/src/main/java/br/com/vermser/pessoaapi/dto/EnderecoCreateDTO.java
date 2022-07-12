@@ -1,6 +1,7 @@
 package br.com.vermser.pessoaapi.dto;
 
 import br.com.vermser.pessoaapi.enums.TiposDeEndereco;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import javax.validation.constraints.*;
@@ -12,6 +13,7 @@ import javax.validation.constraints.*;
 @ToString
 public class EnderecoCreateDTO {
 
+    @Schema(description = "Tipo de enderenço = COMERCIAL/RESIDENCIAL")
     @NotNull
     private TiposDeEndereco tipo;
 
@@ -22,6 +24,7 @@ public class EnderecoCreateDTO {
     @Size(max = 250)
     private String logradouro;
 
+    @Schema(description = "numero da residencia")
     @NotNull
     @Min(1)
     private Integer numero;

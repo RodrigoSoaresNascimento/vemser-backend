@@ -60,6 +60,7 @@ public class PessoaService {
         pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
         pessoaRecuperada.setNome(pessoaAtualizar.getNome());
         pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
+        pessoaRecuperada.setEmail(pessoaAtualizar.getEmail());
         log.info("Pessoa atualizada");
         PessoaDTO pessoaDTO = converterPessoa(pessoaRecuperada);
         emailService.updateSimpleMessage(pessoaDTO);
