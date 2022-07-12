@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,9 @@ public class PessoaService {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private EmailService emailService;
 
     public Pessoa converterPessoaDTO (PessoaCreateDTO pessoaDTO) {
         return objectMapper.convertValue(pessoaDTO, Pessoa.class);
@@ -36,6 +40,7 @@ public class PessoaService {
         Pessoa pessoaEntity = converterPessoaDTO(pessoa);
         pessoaEntity = pessoaRepository.create(pessoaEntity);
         PessoaDTO pessoaDTO = converterPessoa(pessoaEntity);
+        emailService.novoCadastroSimpleMessage(pessoaDTO);
         log.info("Pessoa criada");
         return pessoaDTO;
     }
@@ -56,14 +61,16 @@ public class PessoaService {
         pessoaRecuperada.setNome(pessoaAtualizar.getNome());
         pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
         log.info("Pessoa atualizada");
-        return converterPessoa(pessoaRecuperada);
+        PessoaDTO pessoaDTO = converterPessoa(pessoaRecuperada);
+        emailService.updateSimpleMessage(pessoaDTO);
+        return pessoaDTO;
     }
 
     public void delete (Integer id) throws Exception {
         Pessoa pessoaRecuperada = findById(id);
         log.info("Pessoa removida!");
         pessoaRepository.list().remove(pessoaRecuperada);
-
+        emailService.deleteSimpleMessage(converterPessoa(pessoaRecuperada));
     }
 
     public List<PessoaDTO> listByName(String nome) {

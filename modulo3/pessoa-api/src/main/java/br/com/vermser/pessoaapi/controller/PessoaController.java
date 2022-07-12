@@ -2,7 +2,9 @@ package br.com.vermser.pessoaapi.controller;
 
 import br.com.vermser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vermser.pessoaapi.dto.PessoaDTO;
+import br.com.vermser.pessoaapi.service.EmailService;
 import br.com.vermser.pessoaapi.service.PessoaService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,8 +17,10 @@ import java.util.List;
 @RequestMapping("/pessoa")
 @Validated
 public class PessoaController {
+
     @Autowired
     private PessoaService pessoaService;
+
 //    public PessoaController() {
 //        this.pessoaService = new PessoaService();
 //    }

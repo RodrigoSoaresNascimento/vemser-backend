@@ -19,4 +19,8 @@ public class PessoaCreateDTO {
     @NotNull
     private String nome;
 
+    //@Email
+    @NotBlank(message = "Não pode ser vazio")
+    private String email;
+
 }

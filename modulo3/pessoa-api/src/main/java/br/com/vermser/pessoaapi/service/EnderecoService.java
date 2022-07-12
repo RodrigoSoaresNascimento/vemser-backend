@@ -4,6 +4,7 @@ import br.com.vermser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.vermser.pessoaapi.dto.EnderecoDTO;
 import br.com.vermser.pessoaapi.entity.Endereco;
 import br.com.vermser.pessoaapi.entity.Pessoa;
+import br.com.vermser.pessoaapi.enums.TipoDeMensagem;
 import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.repository.EnderecoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +28,9 @@ public class EnderecoService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private EmailService emailService;
+
     public Endereco converterEnderecoDTO (EnderecoCreateDTO enderecoCreateDTO){
         return objectMapper.convertValue(enderecoCreateDTO, Endereco.class);
     }
@@ -42,7 +46,10 @@ public class EnderecoService {
         enderecoEntity.setIdPessoa(idPessoa);
         enderecoRepository.create(enderecoEntity);
         log.info("Endereço criado");
-        return converterEndereco(enderecoEntity);
+        EnderecoDTO enderecoDTO = converterEndereco(enderecoEntity);
+        String tipodeMensagem = TipoDeMensagem.CREATE.getTipoDeMensagem();
+        emailService.sendEmail(pessoaService.converterPessoa(pessoaCadastrada), enderecoDTO, tipodeMensagem);
+        return enderecoDTO;
 
     }
 
@@ -56,6 +63,7 @@ public class EnderecoService {
     public EnderecoDTO update (Integer id, EnderecoCreateDTO enderecoAtualizar) throws Exception {
 
         Endereco enderecoRecuperado = findById(id);
+        Pessoa pessoaCadastrada = pessoaService.findById(enderecoRecuperado.getIdPessoa());
         enderecoRecuperado.setCep(enderecoAtualizar.getCep());
         enderecoRecuperado.setCidade(enderecoAtualizar.getCidade());
         enderecoRecuperado.setEstado(enderecoAtualizar.getEstado());
@@ -65,12 +73,17 @@ public class EnderecoService {
         enderecoRecuperado.setTipo(enderecoAtualizar.getTipo());
         enderecoRecuperado.setPais(enderecoAtualizar.getPais());
         log.info("Endereço atualizado");
+        String tipodeMensagem = TipoDeMensagem.UPDATE.getTipoDeMensagem();
+        emailService.sendEmail(pessoaService.converterPessoa(pessoaCadastrada), converterEndereco(enderecoRecuperado), tipodeMensagem);
         return converterEndereco(enderecoRecuperado);
     }
 
     public void delete (Integer id) throws Exception {
         Endereco enderecoRecuperado = findById(id);
+        Pessoa pessoaCadastrada = pessoaService.findById(enderecoRecuperado.getIdPessoa());
+        String tipodeMensagem = TipoDeMensagem.DELETE.getTipoDeMensagem();
         enderecoRepository.list().remove(enderecoRecuperado);
+        emailService.sendEmail(pessoaService.converterPessoa(pessoaCadastrada), converterEndereco(enderecoRecuperado), tipodeMensagem);
         log.info("Endereço deletado");
 
     }

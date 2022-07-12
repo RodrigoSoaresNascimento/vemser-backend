@@ -24,11 +24,15 @@ public class Pessoa {
     @NotNull
     private String nome;
 
-    public Pessoa(Integer idPessoa, String nome, LocalDate dataNascimento, String cpf) {
+    @NotBlank
+    private String email;
+
+    public Pessoa(Integer idPessoa, String nome, LocalDate dataNascimento, String cpf, String email) {
         this.idPessoa = idPessoa;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
         this.nome = nome;
+        this.email = email;
     }
 
     @Override
