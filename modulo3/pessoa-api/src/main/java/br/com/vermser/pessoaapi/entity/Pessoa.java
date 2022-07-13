@@ -13,18 +13,11 @@ import java.time.LocalDate;
 public class Pessoa {
 
     private Integer idPessoa;
-    @Past
-    @NotNull
+
     private LocalDate dataNascimento;
-    @NotBlank(message = "Cpf is mandatory")
-    @NotNull
-    @Size(min = 11, max = 11)
     private String cpf;
-    @NotBlank(message = "Name is mandatory")
-    @NotNull
     private String nome;
 
-    @NotBlank
     private String email;
 
     public Pessoa(Integer idPessoa, String nome, LocalDate dataNascimento, String cpf, String email) {

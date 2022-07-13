@@ -9,33 +9,20 @@ public class Endereco {
     private Integer idPessoa;
     private Integer idEndereco;
 
-    @NotNull
     private TiposDeEndereco tipo;
 
-    @NotNull
-    @NotBlank(message = "Logradouro é obrigatório")
-    @Size(max = 250)
+
     private String logradouro;
 
-    @NotNull
-    @Min(1)
     private Integer numero;
     private String complemento;
 
-    @NotBlank(message = "Cep is mandatory")
-    @NotNull
-    @Size(min = 8, max = 8)
     private String cep;
 
-    @NotNull
-    @NotBlank(message = "Cidade é obrigatório")
-    @Size(max = 250)
     private String cidade;
 
-    @NotBlank(message = "Estado é obrigatorio")
     private String estado;
 
-    @NotBlank(message = "Pais é obrigatorio")
     private String pais;
 
     public Endereco(Integer idPessoa, Integer idEndereco ,TiposDeEndereco tipo, String logradouro, Integer numero, String complemento, String cep, String cidade, String estado, String pais) {

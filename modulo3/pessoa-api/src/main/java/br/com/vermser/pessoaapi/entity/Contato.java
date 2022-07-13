@@ -10,14 +10,9 @@ public class Contato {
 
 
     private Integer idContato;
-    @NotBlank(message = "Numero is mandatory")
-    @NotNull
-    @Size(min = 13, max = 13)
     private String numero;
 
-    @NotNull
     private String descricao;
-    @NotNull
     private String tipoEndereco;
 
     private Integer idPessoa;

@@ -17,17 +17,22 @@ public class EnderecoCreateDTO {
     @NotNull
     private TiposDeEndereco tipo;
 
+    @Schema(description = "identificação unica de pessoa")
     private Integer idPessoa;
 
+    @Schema(description = "Tipo de localidade como, rua, bairro, avenida, etc")
     @NotNull
     @NotBlank(message = "Logradouro é obrigatório")
     @Size(max = 250)
     private String logradouro;
 
+
     @Schema(description = "numero da residencia")
     @NotNull
     @Min(1)
     private Integer numero;
+
+    @Schema(description = "campo que permite mais informações sobre o endereço")
     private String complemento;
 
     @NotBlank(message = "Cep is mandatory")
@@ -35,14 +40,17 @@ public class EnderecoCreateDTO {
     @Size(min = 8, max = 8)
     private String cep;
 
+    @Schema(description = "cidade")
     @NotNull
     @NotBlank(message = "Cidade é obrigatório")
     @Size(max = 250)
     private String cidade;
 
+    @Schema(description = "estado")
     @NotBlank(message = "Estado é obrigatorio")
     private String estado;
 
+    @Schema(description = "pais")
     @NotBlank(message = "Pais é obrigatorio")
     private String pais;
 }

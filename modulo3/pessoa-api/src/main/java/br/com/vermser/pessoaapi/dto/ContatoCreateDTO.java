@@ -18,11 +18,13 @@ public class ContatoCreateDTO {
     @Size(min = 13, max = 13)
     private String numero;
 
+    @Schema(description = "descrição do tipo de contato, whatsapp, telefone, etc")
     @NotNull
     private String descricao;
     @Schema(description = "tipo de endereço = RESIDENCIAL/COMERCIAL")
     @NotNull
     private String tipoEndereco;
 
+    @Schema(description = "identificação unica de pessoa")
     private Integer idPessoa;
 }
