@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 public class EnderecoDTO extends EnderecoCreateDTO{
 
-    @Schema(description = "identificação unica de endereço")
+    @Schema(description = "identificação unica de endereço de uma pessoa")
     private Integer idEndereco;
 
 }

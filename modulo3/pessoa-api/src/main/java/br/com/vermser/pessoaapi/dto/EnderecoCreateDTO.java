@@ -40,17 +40,17 @@ public class EnderecoCreateDTO {
     @Size(min = 8, max = 8)
     private String cep;
 
-    @Schema(description = "cidade")
+    @Schema(description = "cidade de uma pessoa")
     @NotNull
     @NotBlank(message = "Cidade é obrigatório")
     @Size(max = 250)
     private String cidade;
 
-    @Schema(description = "estado")
+    @Schema(description = "estado de uma pessoa")
     @NotBlank(message = "Estado é obrigatorio")
     private String estado;
 
-    @Schema(description = "pais")
+    @Schema(description = "pais de uma pessoa")
     @NotBlank(message = "Pais é obrigatorio")
     private String pais;
 }
