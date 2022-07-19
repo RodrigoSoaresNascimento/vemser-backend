@@ -40,6 +40,7 @@ public class PessoaService {
         PessoaEntity pessoaEntity = converterPessoaDTO(pessoa);
         pessoaEntity = pessoaRepository.save(pessoaEntity);
         PessoaDTO pessoaDTO = converterPessoa(pessoaEntity);
+        pessoaDTO.setIdPessoa(pessoaEntity.getIdPessoa());
         emailService.novoCadastroSimpleMessage(pessoaDTO);
         log.info("PessoaEntity criada");
         return pessoaDTO;

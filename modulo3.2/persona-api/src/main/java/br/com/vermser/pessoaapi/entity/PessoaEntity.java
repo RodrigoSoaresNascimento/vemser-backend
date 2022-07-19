@@ -24,10 +24,10 @@ public class PessoaEntity {
     @Column(name = "DATA_NASCIMENTO")
     private LocalDate dataNascimento;
 
-    @Column(name = "CPF")
+    @Column(name = "CPF", nullable = false, length = 11)
     private String cpf;
 
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", nullable = false)
     private String email;
 
 }

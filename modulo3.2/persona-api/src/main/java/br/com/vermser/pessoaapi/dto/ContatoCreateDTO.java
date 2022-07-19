@@ -1,5 +1,6 @@
 package br.com.vermser.pessoaapi.dto;
 
+import br.com.vermser.pessoaapi.enums.TiposDeEndereco;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -23,7 +24,7 @@ public class ContatoCreateDTO {
     private String descricao;
     @Schema(description = "tipo de endereço = RESIDENCIAL/COMERCIAL")
     @NotNull
-    private String tipoEndereco;
+    private TiposDeEndereco tipoEndereco;
 
     @Schema(description = "identificação unica de pessoa")
     private Integer idPessoa;

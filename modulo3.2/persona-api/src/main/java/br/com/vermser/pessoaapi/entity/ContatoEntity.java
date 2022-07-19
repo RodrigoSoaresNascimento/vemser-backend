@@ -14,7 +14,7 @@ public class ContatoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTATO_SEQ")
     @SequenceGenerator(name = "CONTATO_SEQ", sequenceName = "seq_contato", allocationSize = 1)
-    @Column(name = "id_contato")
+    @Column(name = "id_contato",nullable = false)
     private Integer idContato;
 
     @Column(name = "numero")
@@ -22,8 +22,8 @@ public class ContatoEntity {
     @Column(name = "descricao")
     private String descricao;
     @Column(name = "tipo")
-    private String tipoEndereco;
-    @Column(name = "id_pessoa")
+    private TiposDeEndereco tipoEndereco;
+    @Column(name = "id_pessoa",nullable = false)
     private Integer idPessoa;
 
 }
