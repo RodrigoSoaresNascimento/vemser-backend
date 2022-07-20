@@ -47,8 +47,8 @@ public class EnderecoService {
         enderecoRepository.save(enderecoEntity);
         log.info("Endereço criado");
         EnderecoDTO enderecoDTO = converterEndereco(enderecoEntity);
-        //String tipodeMensagem = TipoDeMensagem.CREATE.getTipoDeMensagem();
-        // emailService.sendEmail(pessoaService.converterPessoa(pessoaCadastrada), enderecoDTO, tipodeMensagem);
+        String tipodeMensagem = TipoDeMensagem.CREATE.getTipoDeMensagem();
+        emailService.sendEmail(pessoaService.converterPessoa(pessoaCadastrada), enderecoDTO, tipodeMensagem);
         return enderecoDTO;
 
     }
@@ -63,7 +63,7 @@ public class EnderecoService {
     public EnderecoDTO update (Integer id, EnderecoCreateDTO enderecoAtualizar) throws Exception {
 
         EnderecoEntity enderecoRecuperado = findById(id);
-        //PessoaEntity pessoaCadastrada = pessoaService.findById(enderecoRecuperado.getIdPessoa());
+        //PessoaEntity pessoaCadastrada = pessoaService.findById(enderecoRecuperado.getPessoas().);
         enderecoRecuperado.setCep(enderecoAtualizar.getCep());
         enderecoRecuperado.setCidade(enderecoAtualizar.getCidade());
         enderecoRecuperado.setEstado(enderecoAtualizar.getEstado());
@@ -73,8 +73,8 @@ public class EnderecoService {
         enderecoRecuperado.setTipo(enderecoAtualizar.getTipo());
         enderecoRecuperado.setPais(enderecoAtualizar.getPais());
         log.info("Endereço atualizado");
-        //String tipodeMensagem = TipoDeMensagem.UPDATE.getTipoDeMensagem();
-        //emailService.sendEmail(pessoaService.converterPessoa(pessoaCadastrada), converterEndereco(enderecoRecuperado), tipodeMensagem);
+        String tipodeMensagem = TipoDeMensagem.UPDATE.getTipoDeMensagem();
+       // emailService.sendEmail(pessoaService.converterPessoa(pessoaCadastrada), converterEndereco(enderecoRecuperado), tipodeMensagem);
         return converterEndereco(enderecoRepository.save(enderecoRecuperado));
     }
 

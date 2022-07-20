@@ -1,9 +1,11 @@
 package br.com.vermser.pessoaapi.entity;
 
 import br.com.vermser.pessoaapi.enums.TiposDeEndereco;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,7 +25,12 @@ public class ContatoEntity {
     private String descricao;
     @Column(name = "tipo")
     private TiposDeEndereco tipoEndereco;
-    @Column(name = "id_pessoa",nullable = false)
+    @Column(name = "id_pessoa",insertable = false, updatable = false)
     private Integer idPessoa;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "id_pessoa")
+    private PessoaEntity pessoaEntity;
 
 }

@@ -1,7 +1,9 @@
 package br.com.vermser.pessoaapi.controller;
 
-import br.com.vermser.pessoaapi.dto.PessoaCreateDTO;
-import br.com.vermser.pessoaapi.dto.PessoaDTO;
+import br.com.vermser.pessoaapi.dto.*;
+import br.com.vermser.pessoaapi.entity.ContatoEntity;
+import br.com.vermser.pessoaapi.entity.EnderecoEntity;
+import br.com.vermser.pessoaapi.entity.PetEntity;
 import br.com.vermser.pessoaapi.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -93,6 +95,26 @@ public class PessoaController {
     @GetMapping("/byname")
     public  ResponseEntity<List<PessoaDTO>> listByName (@RequestParam("nome=") String nome){
         return ResponseEntity.ok(pessoaService.listByName(nome));
+    }
+
+    @GetMapping("/cpf")
+    public PessoaDTO listByCpf(@RequestParam("cpf=") String cpf){
+        return pessoaService.listByCpf(cpf);
+    }
+
+    @GetMapping("/contatos/{idPessoa}")
+    public List<PessoaContatoDTO> listContatos (@PathVariable(value = "idPessoa", required = false) Integer id) {
+       return  pessoaService.listContatos(id);
+    }
+
+    @GetMapping("/enderecos/{idPessoa}")
+    public  List<PessoaEnderecoDTO> listEnderecos (@PathVariable(value = "idPessoa", required = false) Integer id) {
+        return  pessoaService.listEnderecos(id);
+    }
+
+    @GetMapping("/pets/{idPessoa}")
+    public List<PessoaPetDTO> buscarPet (@PathVariable(value = "idPessoa", required = false) Integer id) {
+        return  pessoaService.buscarPet(id);
     }
 
 }

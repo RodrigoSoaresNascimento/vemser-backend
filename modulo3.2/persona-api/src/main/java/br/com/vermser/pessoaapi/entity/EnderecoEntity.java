@@ -1,12 +1,15 @@
 package br.com.vermser.pessoaapi.entity;
 
 import br.com.vermser.pessoaapi.enums.TiposDeEndereco;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,7 +19,7 @@ public class EnderecoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ENDERECO_SEQ")
     @SequenceGenerator(name = "ENDERECO_SEQ", sequenceName = "seq_endereco_contato", allocationSize = 1)
-    @Column(name = "id_endereco",nullable = false)
+    @Column(name = "id_endereco",insertable = false, updatable = false)
     private Integer idEndereco;
     @Column(name = "logradouro")
     private String logradouro;
@@ -40,5 +43,9 @@ public class EnderecoEntity {
 
     @Column(name = "tipo")
     private TiposDeEndereco tipo;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "enderecos")
+    private Set<PessoaEntity> pessoas;
 
 }
