@@ -43,7 +43,6 @@ public class EnderecoService {
 
         PessoaEntity pessoaCadastrada = pessoaService.findById(idPessoa);
         EnderecoEntity enderecoEntity = converterEnderecoDTO(endereco);
-        //enderecoEntity.setIdPessoa(idPessoa);
         enderecoRepository.save(enderecoEntity);
         log.info("Endereço criado");
         EnderecoDTO enderecoDTO = converterEndereco(enderecoEntity);
@@ -63,7 +62,7 @@ public class EnderecoService {
     public EnderecoDTO update (Integer id, EnderecoCreateDTO enderecoAtualizar) throws Exception {
 
         EnderecoEntity enderecoRecuperado = findById(id);
-        //PessoaEntity pessoaCadastrada = pessoaService.findById(enderecoRecuperado.getPessoas().);
+        enderecoRecuperado.setPessoas(enderecoRecuperado.getPessoas());
         enderecoRecuperado.setCep(enderecoAtualizar.getCep());
         enderecoRecuperado.setCidade(enderecoAtualizar.getCidade());
         enderecoRecuperado.setEstado(enderecoAtualizar.getEstado());
@@ -80,7 +79,6 @@ public class EnderecoService {
 
     public void delete (Integer id) throws Exception {
         EnderecoEntity enderecoRecuperado = findById(id);
-        //PessoaEntity pessoaCadastrada = pessoaService.findById(enderecoRecuperado.getIdPessoa());
         String tipodeMensagem = TipoDeMensagem.DELETE.getTipoDeMensagem();
         enderecoRepository.delete(enderecoRecuperado);
         //emailService.sendEmail(pessoaService.converterPessoa(pessoaCadastrada), converterEndereco(enderecoRecuperado), tipodeMensagem);

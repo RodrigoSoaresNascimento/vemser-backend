@@ -8,6 +8,7 @@ import br.com.vermser.pessoaapi.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -103,17 +104,17 @@ public class PessoaController {
     }
 
     @GetMapping("/contatos/{idPessoa}")
-    public List<PessoaContatoDTO> listContatos (@PathVariable(value = "idPessoa", required = false) Integer id) {
+    public List<PessoaContatoDTO> listContatos (@RequestParam(required = false) Integer id) {
        return  pessoaService.listContatos(id);
     }
 
     @GetMapping("/enderecos/{idPessoa}")
-    public  List<PessoaEnderecoDTO> listEnderecos (@PathVariable(value = "idPessoa", required = false) Integer id) {
+    public  List<PessoaEnderecoDTO> listEnderecos (@RequestParam(required = false) Integer id) {
         return  pessoaService.listEnderecos(id);
     }
 
     @GetMapping("/pets/{idPessoa}")
-    public List<PessoaPetDTO> buscarPet (@PathVariable(value = "idPessoa", required = false) Integer id) {
+    public List<PessoaPetDTO> buscarPet (@RequestParam(required = false) Integer id) {
         return  pessoaService.buscarPet(id);
     }
 

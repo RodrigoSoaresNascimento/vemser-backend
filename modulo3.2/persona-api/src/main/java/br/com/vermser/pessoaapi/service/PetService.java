@@ -1,5 +1,6 @@
 package br.com.vermser.pessoaapi.service;
 
+import br.com.vermser.pessoaapi.dto.PessoaDTO;
 import br.com.vermser.pessoaapi.dto.PetDTO;
 import br.com.vermser.pessoaapi.entity.PessoaEntity;
 import br.com.vermser.pessoaapi.entity.PetEntity;
@@ -35,6 +36,7 @@ public class PetService {
     public PetDTO create (Integer idPessoa, PetDTO pet) {
         PessoaEntity pessoa = pessoaService.findById(idPessoa);
         pet.setIdPessoa(idPessoa);
+        pet.setPessoa(objectMapper.convertValue(pessoa, PessoaDTO.class));
         PetEntity petEntity = converterPetDTO(pet);
         petEntity = repository.save(petEntity);
         PetDTO petDTO = converterpet(petEntity);
