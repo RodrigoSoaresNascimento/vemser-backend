@@ -42,6 +42,7 @@ public class ContatoService {
         PessoaEntity pessoaCadastrada = pessoaService.findById(idPessoa);
         ContatoEntity contatoEntity = converterContatoDTO(contato);
         contatoEntity.setIdPessoa(idPessoa);
+        contatoEntity.setPessoaEntity(pessoaCadastrada);
         contatoRepository.save(contatoEntity);
         log.info("ContatoEntity criado");
         return converterContato(contatoEntity);

@@ -1,5 +1,6 @@
 package br.com.vermser.pessoaapi.entity;
 
+import br.com.vermser.pessoaapi.enums.TipoDePet;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +29,7 @@ public class PetEntity {
     private String nome;
 
     @Column(name = "tipo")
-    private Integer tipo;
+    private TipoDePet tipo;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)

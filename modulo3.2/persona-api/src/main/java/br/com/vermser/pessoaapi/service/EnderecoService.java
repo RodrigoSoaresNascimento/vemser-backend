@@ -43,6 +43,7 @@ public class EnderecoService {
 
         PessoaEntity pessoaCadastrada = pessoaService.findById(idPessoa);
         EnderecoEntity enderecoEntity = converterEnderecoDTO(endereco);
+        enderecoEntity.getPessoas().add(pessoaCadastrada);
         enderecoRepository.save(enderecoEntity);
         log.info("Endereço criado");
         EnderecoDTO enderecoDTO = converterEndereco(enderecoEntity);

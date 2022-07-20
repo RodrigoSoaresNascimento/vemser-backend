@@ -1,6 +1,8 @@
 package br.com.vermser.pessoaapi.dto;
 
 import br.com.vermser.pessoaapi.entity.PessoaEntity;
+import br.com.vermser.pessoaapi.enums.TipoDePet;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -12,18 +14,17 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class PetDTO {
 
+    @Schema(description = "identificador unico do pet")
     private Integer idPet;
 
-
+    @Schema(description = "identificador unico da pessoa")
     private Integer idPessoa;
 
     @NotBlank(message = "Name is mandatory")
     @NotNull
     private String nome;
 
-
-    private Integer tipo;
-
-    private PessoaDTO pessoa;
+    @Schema(description = "tipo de animal da pessoa")
+    private TipoDePet tipo;
 
 }

@@ -103,18 +103,18 @@ public class PessoaController {
         return pessoaService.listByCpf(cpf);
     }
 
-    @GetMapping("/contatos/{idPessoa}")
-    public List<PessoaContatoDTO> listContatos (@RequestParam(required = false) Integer id) {
+    @GetMapping("/contatos/idPessoa")
+    public List<PessoaContatoDTO> listContatos (@RequestParam(value = "idPessoa=", required = false) Integer id) {
        return  pessoaService.listContatos(id);
     }
 
-    @GetMapping("/enderecos/{idPessoa}")
-    public  List<PessoaEnderecoDTO> listEnderecos (@RequestParam(required = false) Integer id) {
+    @GetMapping("/enderecos/idPessoa")
+    public  List<PessoaEnderecoDTO> listEnderecos (@RequestParam(value = "idPessoa=", required = false) Integer id) {
         return  pessoaService.listEnderecos(id);
     }
 
-    @GetMapping("/pets/{idPessoa}")
-    public List<PessoaPetDTO> buscarPet (@RequestParam(required = false) Integer id) {
+    @GetMapping("/pets/idPessoa")
+    public List<PessoaPetDTO> buscarPet (@RequestParam(value = "idPessoa=", required = false) Integer id) {
         return  pessoaService.buscarPet(id);
     }
 
