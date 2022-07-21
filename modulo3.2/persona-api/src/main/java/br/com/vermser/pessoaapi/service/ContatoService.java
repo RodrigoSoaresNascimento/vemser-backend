@@ -59,6 +59,7 @@ public class ContatoService {
     public ContatoDTO update (Integer id
             , ContatoCreateDTO contatoAtualizar) throws Exception {
         ContatoEntity contatoEntityRecuperado = findByid(id);
+        contatoEntityRecuperado.setIdPessoa(contatoAtualizar.getIdPessoa());
         contatoEntityRecuperado.setNumero(contatoAtualizar.getNumero());
         contatoEntityRecuperado.setDescricao(contatoAtualizar.getDescricao());
         contatoEntityRecuperado.setTipoContato(contatoAtualizar.getTipoEndereco());

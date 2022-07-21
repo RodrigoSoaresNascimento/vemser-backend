@@ -18,7 +18,6 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
     PessoaEntity findByCpf (String cpf);
 
     @Query(" select new br.com.vermser.pessoaapi.dto.PessoaCompostaDTO(" +
-            " p.idPessoa," +
             " p.nome," +
             " p.email," +
             " c.numero," +
@@ -33,7 +32,7 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
             "  left join p.enderecos e " +
             "  left join p.petEntity pet" +
             " where (:idPessoa is null OR p.idPessoa = :idPessoa )")
-    List<PessoaCompostaDTO> listaComposta(@Param("idPessoa") Integer idPessoa);
+    List<PessoaCompostaDTO> relatorioPessoa(@Param("idPessoa") Integer idPessoa);
 
     @Query(" select p " +
             "  from PESSOA p " +

@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -45,7 +46,6 @@ public class EnderecoService {
 
         PessoaEntity pessoaCadastrada = pessoaService.findById(idPessoa);
         EnderecoEntity enderecoEntity = converterEnderecoDTO(endereco);
-
         enderecoEntity.setPessoas(Set.of(pessoaCadastrada));
         enderecoRepository.save(enderecoEntity);
         log.info("Endereço criado");

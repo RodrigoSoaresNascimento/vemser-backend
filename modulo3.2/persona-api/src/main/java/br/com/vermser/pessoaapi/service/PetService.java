@@ -34,9 +34,9 @@ public class PetService {
 
     public PetDTO create (Integer idPessoa, PetDTO pet) {
         PessoaEntity pessoa = pessoaService.findById(idPessoa);
-        pet.setIdPessoa(idPessoa);
         PetEntity petEntity = converterPetDTO(pet);
         petEntity.setPessoa(pessoa);
+        pet.setIdPessoa(idPessoa);
         petEntity = repository.save(petEntity);
         PetDTO petDTO = converterpet(petEntity);
         return petDTO;
@@ -53,13 +53,19 @@ public class PetService {
             , PetDTO petAtualizar) throws Exception {
 
         PetEntity petRecuperado = findById(id);
-        PessoaEntity pessoaRecuperado = pessoaService.findById(petAtualizar.getIdPessoa());
+        PessoaEntity pessoaRecuperado = petRecuperado.getPessoa();
+        pessoaRecuperado.setPetEntity(null);
+
+        PessoaEntity pessoaEntity = pessoaService.findById(petAtualizar.getIdPessoa());
         petRecuperado.setIdPet(id);
         petRecuperado.setNome(petAtualizar.getNome());
         petRecuperado.setTipo(petAtualizar.getTipo());
         petRecuperado.setPessoa(pessoaRecuperado);
         pessoaRecuperado.setPetEntity(petRecuperado);
         pessoaService.savePersonEntity(pessoaRecuperado);
+        if(!pessoaRecuperado.getIdPessoa().equals(pessoaEntity.getIdPessoa())){
+            pessoaService.savePersonEntity(pessoaEntity);
+        }
         return converterpet(repository.save(petRecuperado));
     }
 

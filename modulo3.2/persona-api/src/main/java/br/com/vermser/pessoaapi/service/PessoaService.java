@@ -10,6 +10,7 @@ import br.com.vermser.pessoaapi.repository.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -171,34 +172,32 @@ public class PessoaService {
 
     }
 
-    public List<PessoaCompostaDTO> listaComposta (Integer idPessoa){
-        return pessoaRepository.listaComposta(idPessoa);
+    public List<PessoaCompostaDTO> relatorioPessoa (Integer idPessoa){
+        return pessoaRepository.relatorioPessoa(idPessoa);
     }
 
     public List<PessoaCompletoDTO> informacoesCompletas (Integer idPessoa){
         if (idPessoa == null) {
             return pessoaRepository.findAll()
                     .stream()
-                    .map(pessoaEntity -> {
-                        PessoaCompletoDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaCompletoDTO.class);
-                        pessoaDTO.setEnderecosDTO(pessoaEntity.getEnderecos().stream()
-                                .map(enderecoEntity -> objectMapper.convertValue(enderecoEntity, EnderecoDTO.class)).toList());
-                        pessoaDTO.setContatosDTO(pessoaEntity.getContatos().stream()
-                                .map(contatoEntity -> objectMapper.convertValue(contatoEntity, ContatoDTO.class)).toList());
-                        pessoaDTO.setPetDTO(objectMapper.convertValue(pessoaEntity.getPetEntity(), PetDTO.class));
-                        return pessoaDTO;
-                    }).toList();
+                    .map(this::streamMap)
+                    .toList();
         } else {
             return pessoaRepository.findById(idPessoa)
-                    .map(pessoaEntity -> {
-                        PessoaCompletoDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaCompletoDTO.class);
-                        pessoaDTO.setEnderecosDTO(pessoaEntity.getEnderecos().stream()
-                                .map(enderecoEntity -> objectMapper.convertValue(enderecoEntity, EnderecoDTO.class)).toList());
-                        pessoaDTO.setContatosDTO(pessoaEntity.getContatos().stream()
-                                .map(contatoEntity -> objectMapper.convertValue(contatoEntity, ContatoDTO.class)).toList());
-                        pessoaDTO.setPetDTO(objectMapper.convertValue(pessoaEntity.getPetEntity(), PetDTO.class));
-                        return pessoaDTO;
-                    }).stream().toList();
+                    .stream()
+                    .map(this::streamMap)
+                    .toList();
         }
+    }
+
+
+    public PessoaCompletoDTO streamMap(PessoaEntity pessoaEntity) {
+        PessoaCompletoDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaCompletoDTO.class);
+        pessoaDTO.setEnderecosDTO(pessoaEntity.getEnderecos().stream()
+                .map(enderecoEntity -> objectMapper.convertValue(enderecoEntity, EnderecoDTO.class)).toList());
+        pessoaDTO.setContatosDTO(pessoaEntity.getContatos().stream()
+                .map(contatoEntity -> objectMapper.convertValue(contatoEntity, ContatoDTO.class)).toList());
+        pessoaDTO.setPetDTO(objectMapper.convertValue(pessoaEntity.getPetEntity(), PetDTO.class));
+        return pessoaDTO;
     }
 }
