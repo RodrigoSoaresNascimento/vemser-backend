@@ -2,7 +2,9 @@ package br.com.vermser.pessoaapi.controller;
 
 import br.com.vermser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.vermser.pessoaapi.dto.EnderecoDTO;
+import br.com.vermser.pessoaapi.entity.EnderecoEntity;
 import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
+import br.com.vermser.pessoaapi.repository.EnderecoRepository;
 import br.com.vermser.pessoaapi.service.EnderecoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

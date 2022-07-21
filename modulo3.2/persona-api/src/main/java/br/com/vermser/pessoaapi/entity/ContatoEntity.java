@@ -24,7 +24,7 @@ public class ContatoEntity {
     @Column(name = "descricao")
     private String descricao;
     @Column(name = "tipo")
-    private TiposDeEndereco tipoEndereco;
+    private TiposDeEndereco tipoContato;
     @Column(name = "id_pessoa",insertable = false, updatable = false)
     private Integer idPessoa;
 

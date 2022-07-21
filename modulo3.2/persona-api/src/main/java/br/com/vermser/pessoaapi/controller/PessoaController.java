@@ -3,7 +3,10 @@ package br.com.vermser.pessoaapi.controller;
 import br.com.vermser.pessoaapi.dto.*;
 import br.com.vermser.pessoaapi.entity.ContatoEntity;
 import br.com.vermser.pessoaapi.entity.EnderecoEntity;
+import br.com.vermser.pessoaapi.entity.PessoaEntity;
 import br.com.vermser.pessoaapi.entity.PetEntity;
+import br.com.vermser.pessoaapi.enums.TiposDeEndereco;
+import br.com.vermser.pessoaapi.repository.PessoaRepository;
 import br.com.vermser.pessoaapi.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -116,6 +119,21 @@ public class PessoaController {
     @GetMapping("/pets/idPessoa")
     public List<PessoaPetDTO> buscarPet (@RequestParam(value = "idPessoa=", required = false) Integer id) {
         return  pessoaService.buscarPet(id);
+    }
+
+    @GetMapping("/contatos-por-tipo")
+    public List<PessoaEntity> getContatosPorTipo(TiposDeEndereco tipoContato) {
+        return pessoaService.listPessoasPorTipoContato(tipoContato);
+    }
+
+    @GetMapping("/pessoa-completo-informacoes")
+    public List<PessoaCompletoDTO> listarTodasInformacoes (@RequestParam(value = "idPessoa=", required = false) Integer id){
+        return pessoaService.informacoesCompletas(id);
+    }
+
+    @GetMapping("/pessoa-completo")
+    public List<PessoaCompostaDTO> listarComposta (@RequestParam(required = false) Integer idPessoa){
+        return pessoaService.listaComposta(idPessoa);
     }
 
 }

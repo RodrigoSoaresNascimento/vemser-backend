@@ -29,10 +29,11 @@ public class PetEntity {
     private String nome;
 
     @Column(name = "tipo")
+    @Enumerated(EnumType.ORDINAL)
     private TipoDePet tipo;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
+    @JoinColumn(name="id_pessoa", referencedColumnName = "id_pessoa")
     private PessoaEntity pessoa;
 }

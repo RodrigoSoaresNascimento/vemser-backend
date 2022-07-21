@@ -4,9 +4,11 @@ import br.com.vermser.pessoaapi.dto.*;
 import br.com.vermser.pessoaapi.entity.EnderecoEntity;
 import br.com.vermser.pessoaapi.entity.PessoaEntity;
 import br.com.vermser.pessoaapi.entity.PetEntity;
+import br.com.vermser.pessoaapi.enums.TiposDeEndereco;
 import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.repository.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -147,17 +149,56 @@ public class PessoaService {
                     .stream()
                     .map(pessoaEntity -> {
                         PessoaPetDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaPetDTO.class);
-                        pessoaDTO.setPetDTO(objectMapper.convertValue(pessoaEntity.getPet(), PetDTO.class));
+                        pessoaDTO.setPetDTO(objectMapper.convertValue(pessoaEntity.getPetEntity(), PetDTO.class));
                         return pessoaDTO;
                     }).toList();
         } else {
             return pessoaRepository.findById(idPessoa)
                     .map(pessoaEntity -> {
                         PessoaPetDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaPetDTO.class);
-                        pessoaDTO.setPetDTO(objectMapper.convertValue(pessoaEntity.getPet(), PetDTO.class));
+                        pessoaDTO.setPetDTO(objectMapper.convertValue(pessoaEntity.getPetEntity(), PetDTO.class));
                         return pessoaDTO;
                     }).stream().toList();
         }
     }
 
+    public PessoaEntity savePersonEntity (PessoaEntity pessoa){
+        return pessoaRepository.save(pessoa);
+    }
+
+    public List<PessoaEntity> listPessoasPorTipoContato(TiposDeEndereco tipoContato) {
+        return pessoaRepository.listPessoasPorTipoContato(TiposDeEndereco.ofTipo(tipoContato.ordinal()));
+
+    }
+
+    public List<PessoaCompostaDTO> listaComposta (Integer idPessoa){
+        return pessoaRepository.listaComposta(idPessoa);
+    }
+
+    public List<PessoaCompletoDTO> informacoesCompletas (Integer idPessoa){
+        if (idPessoa == null) {
+            return pessoaRepository.findAll()
+                    .stream()
+                    .map(pessoaEntity -> {
+                        PessoaCompletoDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaCompletoDTO.class);
+                        pessoaDTO.setEnderecosDTO(pessoaEntity.getEnderecos().stream()
+                                .map(enderecoEntity -> objectMapper.convertValue(enderecoEntity, EnderecoDTO.class)).toList());
+                        pessoaDTO.setContatosDTO(pessoaEntity.getContatos().stream()
+                                .map(contatoEntity -> objectMapper.convertValue(contatoEntity, ContatoDTO.class)).toList());
+                        pessoaDTO.setPetDTO(objectMapper.convertValue(pessoaEntity.getPetEntity(), PetDTO.class));
+                        return pessoaDTO;
+                    }).toList();
+        } else {
+            return pessoaRepository.findById(idPessoa)
+                    .map(pessoaEntity -> {
+                        PessoaCompletoDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaCompletoDTO.class);
+                        pessoaDTO.setEnderecosDTO(pessoaEntity.getEnderecos().stream()
+                                .map(enderecoEntity -> objectMapper.convertValue(enderecoEntity, EnderecoDTO.class)).toList());
+                        pessoaDTO.setContatosDTO(pessoaEntity.getContatos().stream()
+                                .map(contatoEntity -> objectMapper.convertValue(contatoEntity, ContatoDTO.class)).toList());
+                        pessoaDTO.setPetDTO(objectMapper.convertValue(pessoaEntity.getPetEntity(), PetDTO.class));
+                        return pessoaDTO;
+                    }).stream().toList();
+        }
+    }
 }

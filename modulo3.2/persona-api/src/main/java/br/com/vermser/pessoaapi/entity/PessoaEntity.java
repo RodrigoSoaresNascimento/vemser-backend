@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -34,8 +33,8 @@ public class PessoaEntity {
     private String email;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "pessoa")
-    private PetEntity pet;
+    @OneToOne(mappedBy = "pessoa",fetch = FetchType.LAZY)
+    private PetEntity petEntity;
 
     @JsonIgnore
     @OneToMany(mappedBy = "pessoaEntity",
@@ -45,7 +44,7 @@ public class PessoaEntity {
     private Set<ContatoEntity> contatos;
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "PESSOA_X_PESSOA_ENDERECO",
             joinColumns = @JoinColumn(name = "id_pessoa"),
             inverseJoinColumns = @JoinColumn(name = "id_endereco")

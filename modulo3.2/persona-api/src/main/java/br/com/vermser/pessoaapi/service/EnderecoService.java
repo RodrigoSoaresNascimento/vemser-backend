@@ -2,6 +2,7 @@ package br.com.vermser.pessoaapi.service;
 
 import br.com.vermser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.vermser.pessoaapi.dto.EnderecoDTO;
+import br.com.vermser.pessoaapi.dto.PessoaDTO;
 import br.com.vermser.pessoaapi.entity.EnderecoEntity;
 import br.com.vermser.pessoaapi.entity.PessoaEntity;
 import br.com.vermser.pessoaapi.enums.TipoDeMensagem;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,7 +45,8 @@ public class EnderecoService {
 
         PessoaEntity pessoaCadastrada = pessoaService.findById(idPessoa);
         EnderecoEntity enderecoEntity = converterEnderecoDTO(endereco);
-        enderecoEntity.getPessoas().add(pessoaCadastrada);
+
+        enderecoEntity.setPessoas(Set.of(pessoaCadastrada));
         enderecoRepository.save(enderecoEntity);
         log.info("Endereço criado");
         EnderecoDTO enderecoDTO = converterEndereco(enderecoEntity);
@@ -62,20 +65,17 @@ public class EnderecoService {
 
     public EnderecoDTO update (Integer id, EnderecoCreateDTO enderecoAtualizar) throws Exception {
 
-        EnderecoEntity enderecoRecuperado = findById(id);
-        enderecoRecuperado.setPessoas(enderecoRecuperado.getPessoas());
-        enderecoRecuperado.setCep(enderecoAtualizar.getCep());
-        enderecoRecuperado.setCidade(enderecoAtualizar.getCidade());
-        enderecoRecuperado.setEstado(enderecoAtualizar.getEstado());
-        enderecoRecuperado.setNumero(enderecoAtualizar.getNumero());
-        enderecoRecuperado.setComplemento(enderecoAtualizar.getComplemento());
-        enderecoRecuperado.setLogradouro(enderecoAtualizar.getLogradouro());
-        enderecoRecuperado.setTipo(enderecoAtualizar.getTipo());
-        enderecoRecuperado.setPais(enderecoAtualizar.getPais());
-        log.info("Endereço atualizado");
+        PessoaEntity pessoaEntity = pessoaService.findById(enderecoAtualizar.getIdPessoa());
+        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaDTO.class);
+        EnderecoEntity enderecoEntityRecuperado = findById(id);
+        EnderecoEntity enderecoEntity = objectMapper.convertValue(enderecoAtualizar, EnderecoEntity.class);
+
         String tipodeMensagem = TipoDeMensagem.UPDATE.getTipoDeMensagem();
-       // emailService.sendEmail(pessoaService.converterPessoa(pessoaCadastrada), converterEndereco(enderecoRecuperado), tipodeMensagem);
-        return converterEndereco(enderecoRepository.save(enderecoRecuperado));
+        enderecoEntity.setIdEndereco(id);
+        enderecoEntity.setPessoas(Set.of(pessoaEntity));
+        // emailService.sendEmail(pessoaService.converterPessoa(pessoaCadastrada), converterEndereco(enderecoRecuperado), tipodeMensagem);
+        log.info("Endereço atualizado");
+        return converterEndereco(enderecoRepository.save(enderecoEntity));
     }
 
     public void delete (Integer id) throws Exception {

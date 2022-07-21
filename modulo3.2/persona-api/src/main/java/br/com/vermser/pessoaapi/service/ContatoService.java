@@ -61,7 +61,7 @@ public class ContatoService {
         ContatoEntity contatoEntityRecuperado = findByid(id);
         contatoEntityRecuperado.setNumero(contatoAtualizar.getNumero());
         contatoEntityRecuperado.setDescricao(contatoAtualizar.getDescricao());
-        contatoEntityRecuperado.setTipoEndereco(contatoAtualizar.getTipoEndereco());
+        contatoEntityRecuperado.setTipoContato(contatoAtualizar.getTipoEndereco());
         log.info("ContatoEntity Atualizado");
         return converterContato(contatoRepository.save(contatoEntityRecuperado));
     }
