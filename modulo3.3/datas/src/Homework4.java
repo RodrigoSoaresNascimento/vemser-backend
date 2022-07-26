@@ -5,31 +5,26 @@ import java.time.temporal.ChronoUnit;
 public class Homework4 {
 
     public static void main(String[] args) {
-        LocalDateTime dataDoShow = LocalDateTime.parse("2024-09-14T18:30:00.000",
-                DateTimeFormatter.ISO_DATE_TIME);
+        LocalDateTime dataLocal = LocalDateTime.now();
+        ZoneId sp = ZoneId.of("America/Sao_Paulo");
+        ZonedDateTime agoraZdt = ZonedDateTime.of(dataLocal, sp);
+        LocalDateTime dataDoShow = LocalDateTime.of(2024, 9, 14, 18, 30);
+        ZoneId londres = ZoneId.of("Europe/London");
+        ZonedDateTime showZdt = ZonedDateTime.of(dataDoShow, londres);
 
-        LocalDateTime diaAtual = LocalDateTime.now();
-
-        long anos = diaAtual.until(dataDoShow, ChronoUnit.YEARS);
-        diaAtual = diaAtual.plusYears(anos);
-
-        long meses = diaAtual.until(dataDoShow, ChronoUnit.MONTHS);
-        diaAtual = diaAtual.plusMonths(meses);
-
-        long dias = diaAtual.until(dataDoShow, ChronoUnit.DAYS);
-        diaAtual = diaAtual.plusDays(dias);
-
-        long horas = diaAtual.until(dataDoShow, ChronoUnit.HOURS);
-
-        diaAtual = diaAtual.plusHours(horas);
-        long minutos = diaAtual.until(dataDoShow, ChronoUnit.MINUTES);
-
-        System.out.println("Anos: " + anos);
-        System.out.println("Meses: " + meses);
-        System.out.println("Dias: " + dias);
-        System.out.println("Horas: " + horas);
-        System.out.println("Minutos: " + minutos);
-
+        long anos = agoraZdt.until(showZdt, ChronoUnit.YEARS);
+        agoraZdt = agoraZdt.plusYears(anos);
+        long meses = agoraZdt.until(showZdt, ChronoUnit.MONTHS);
+        agoraZdt = agoraZdt.plusMonths(meses);
+        long dias = agoraZdt.until(showZdt, ChronoUnit.DAYS);
+        agoraZdt = agoraZdt.plusDays(dias);
+        long horas = agoraZdt.until(showZdt, ChronoUnit.HOURS);
+        agoraZdt = agoraZdt.plusHours(horas);
+        long minutos = agoraZdt.until(showZdt, ChronoUnit.MINUTES);
+        agoraZdt = agoraZdt.plusMinutes(minutos);
+        long segundos = agoraZdt.until(showZdt, ChronoUnit.SECONDS);
+        System.out.println("Faltam "+anos+" anos, "+meses+" meses, "+dias+" dias, "+horas
+                +" horas, "+minutos+", minutos e "+segundos+" segundos para o evento");
     }
 
 }
