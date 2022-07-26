@@ -1,26 +1,34 @@
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Period;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Homework4 {
 
     public static void main(String[] args) {
+        LocalDateTime dataDoShow = LocalDateTime.parse("2024-09-14T18:30:00.000",
+                DateTimeFormatter.ISO_DATE_TIME);
 
-        LocalDateTime minhaData = LocalDateTime.parse("14/09/2024 18:30", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        LocalDateTime diaAtual = LocalDateTime.now();
 
-        LocalDateTime dataAteOEvento = minhaData
-                .minusYears(LocalDateTime.now().getYear())
-                .minusMonths(LocalDateTime.now().getMonthValue())
-                .minusDays(LocalDateTime.now().getDayOfMonth())
-                .minusHours(LocalDateTime.now().getHour())
-                .minusMinutes(LocalDateTime.now().getMinute());
+        long anos = diaAtual.until(dataDoShow, ChronoUnit.YEARS);
+        diaAtual = diaAtual.plusYears(anos);
 
-        System.out.printf("Tempo ate o evento %d anos , %d meses , %d dias, e %d:%d ",dataAteOEvento.getYear(),
-                dataAteOEvento.getMonthValue()
-                        ,dataAteOEvento.getDayOfMonth()
-        ,dataAteOEvento.getHour()
-        ,dataAteOEvento.getMinute());
+        long meses = diaAtual.until(dataDoShow, ChronoUnit.MONTHS);
+        diaAtual = diaAtual.plusMonths(meses);
+
+        long dias = diaAtual.until(dataDoShow, ChronoUnit.DAYS);
+        diaAtual = diaAtual.plusDays(dias);
+
+        long horas = diaAtual.until(dataDoShow, ChronoUnit.HOURS);
+
+        diaAtual = diaAtual.plusHours(horas);
+        long minutos = diaAtual.until(dataDoShow, ChronoUnit.MINUTES);
+
+        System.out.println("Anos: " + anos);
+        System.out.println("Meses: " + meses);
+        System.out.println("Dias: " + dias);
+        System.out.println("Horas: " + horas);
+        System.out.println("Minutos: " + minutos);
 
     }
 
