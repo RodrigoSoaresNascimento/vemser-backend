@@ -14,10 +14,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfiguration {
 
-    private final TokenService tokenService;
+    @Autowired
+    private TokenService tokenService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -38,7 +38,7 @@ public class SecurityConfiguration {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        // FIXME fazer o security ignorar o swagger
+
         return (web) -> web.ignoring().antMatchers("/v3/api-docs",
                 "/v3/api-docs/**" ,
                         "/swagger-resources/**" ,

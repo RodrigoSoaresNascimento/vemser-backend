@@ -1,7 +1,6 @@
 package br.com.vermser.pessoaapi.security;
 
 import br.com.vermser.pessoaapi.entity.UsuarioEntity;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -14,11 +13,15 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Optional;
 
-@RequiredArgsConstructor
+
 public class TokenAuthenticationFilter  extends OncePerRequestFilter {
 
 
     private final TokenService tokenService;
+
+    public TokenAuthenticationFilter(TokenService tokenService) {
+        this.tokenService = tokenService;
+    }
 
     private static final  String BEARER = "Bearer ";
 

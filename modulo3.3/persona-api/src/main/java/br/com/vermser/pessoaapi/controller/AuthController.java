@@ -5,7 +5,6 @@ import br.com.vermser.pessoaapi.entity.UsuarioEntity;
 import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.security.TokenService;
 import br.com.vermser.pessoaapi.service.UsuarioService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
