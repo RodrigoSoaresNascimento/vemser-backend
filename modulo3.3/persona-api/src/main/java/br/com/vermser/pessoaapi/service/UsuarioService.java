@@ -1,11 +1,12 @@
 package br.com.vermser.pessoaapi.service;
 
+import br.com.vermser.pessoaapi.dto.UsuarioCreateDTO;
+import br.com.vermser.pessoaapi.dto.UsuarioDTO;
 import br.com.vermser.pessoaapi.entity.UsuarioEntity;
-import br.com.vermser.pessoaapi.exceptions.PessoaNaoCadastradaException;
 import br.com.vermser.pessoaapi.repository.Usuariorepository;
-import br.com.vermser.pessoaapi.security.TokenService;
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,9 +17,37 @@ public class UsuarioService {
     @Autowired
     private Usuariorepository usuariorepository;
 
-    public Optional<UsuarioEntity> findyByLoginAndPassord (String login, String password){
-        return usuariorepository.findByLoginAndSenha(login,password);
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    public Optional<UsuarioEntity> findById (Integer id){
+        return usuariorepository.findById(id);
     }
 
-    // FIXME construir métodoss necessários para o usuário
+    private String encodePassword(String password){
+        return new BCryptPasswordEncoder().encode(password);
+    }
+
+
+
+    private UsuarioEntity converterUsuarioParaUsuarioDTO(UsuarioCreateDTO usuarioCreate){
+        return objectMapper.convertValue(usuarioCreate, UsuarioEntity.class);
+    }
+
+    private UsuarioDTO converterUsuarioDTOParaUsuario(UsuarioEntity usuario){
+        return objectMapper.convertValue(usuario, UsuarioDTO.class);
+    }
+
+    public UsuarioDTO create (UsuarioCreateDTO usuarioCreate){
+
+        UsuarioEntity usuario = converterUsuarioParaUsuarioDTO(usuarioCreate);
+        usuario.setSenha(encodePassword(usuario.getSenha()));
+        usuario = usuariorepository.save(usuario);
+
+        return converterUsuarioDTOParaUsuario(usuario);
+    }
+
+    public Optional<UsuarioEntity> findByLogin (String login){
+        return usuariorepository.findByLogin(login);
+    }
 }
