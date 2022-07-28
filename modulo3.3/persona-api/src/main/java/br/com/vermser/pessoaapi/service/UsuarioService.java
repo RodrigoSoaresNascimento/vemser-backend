@@ -3,7 +3,7 @@ package br.com.vermser.pessoaapi.service;
 import br.com.vermser.pessoaapi.dto.UsuarioCreateDTO;
 import br.com.vermser.pessoaapi.dto.UsuarioDTO;
 import br.com.vermser.pessoaapi.entity.UsuarioEntity;
-import br.com.vermser.pessoaapi.repository.Usuariorepository;
+import br.com.vermser.pessoaapi.repository.UsuarioRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,13 +15,13 @@ import java.util.Optional;
 public class UsuarioService {
 
     @Autowired
-    private Usuariorepository usuariorepository;
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
 
     public Optional<UsuarioEntity> findById (Integer id){
-        return usuariorepository.findById(id);
+        return usuarioRepository.findById(id);
     }
 
     private String encodePassword(String password){
@@ -42,12 +42,12 @@ public class UsuarioService {
 
         UsuarioEntity usuario = converterUsuarioParaUsuarioDTO(usuarioCreate);
         usuario.setSenha(encodePassword(usuario.getSenha()));
-        usuario = usuariorepository.save(usuario);
+        usuario = usuarioRepository.save(usuario);
 
         return converterUsuarioDTOParaUsuario(usuario);
     }
 
     public Optional<UsuarioEntity> findByLogin (String login){
-        return usuariorepository.findByLogin(login);
+        return usuarioRepository.findByLogin(login);
     }
 }
