@@ -48,8 +48,8 @@ db.comentarios.find({ _id: 3 });
 //Filtra onde o comentario é são joão ou id da playlist é 2
 db.comentarios.find( { $or : [ {nome: "são joão"}, {id_comentario : {$lt:2}}]});
 
-//filtra onde comentario é musicas e o id do usuario é maior que 1 ou começa com m
+//filtra onde comentario é musicas e o id do usuario é maior ou a 1 ou começa com m
 db.comentarios.find( {
 	comentario: "musicas",
-	$or: [ { id_usuario: { $lt: 1 } }, { comentario: /^m/ } ]
+	$or: [ { id_usuario: { $gte: 1 } }, { comentario: /^m/ } ]
 } );
