@@ -71,8 +71,8 @@ public class Main {
         usuarios.find(filter).projection(projectionUser).forEach(System.out::println);
 
         System.out.println("\nProjeções só comentarios");
-        Bson projectionPlaylist = include("comentario");
-        comentarios.find(filter).projection(projectionPlaylist).forEach(System.out::println);
+        Bson projectionComentario = include("comentario");
+        comentarios.find(filter).projection(projectionComentario).forEach(System.out::println);
 
         //alunos.updateOne(Filters.eq("nome", "Rodrigo"), new Document("$set", new Document("data_nascimento" , new Date(2020-1900, 04, 11))));
         //alunos.updateOne(Filters.eq("nome", "Eduardo"), new Document("$set", new Document("notas" , asList(8,8,9))));
