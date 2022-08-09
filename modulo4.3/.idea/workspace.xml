@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="713b53f9-ee64-44b7-a30e-5500b919fd33" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../modulo3.3/persona-api/src/main/java/br/com/vermser/pessoaapi/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../modulo3.3/persona-api/src/main/java/br/com/vermser/pessoaapi/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../modulo3.3/persona-api/src/main/java/br/com/vermser/pessoaapi/security/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../modulo3.3/persona-api/src/main/java/br/com/vermser/pessoaapi/security/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../modulo3.3/persona-api/src/main/java/br/com/vermser/pessoaapi/service/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../modulo3.3/persona-api/src/main/java/br/com/vermser/pessoaapi/service/UsuarioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../modulo4.1/homework2.2/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../modulo4.1/homework2.2/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consumidor_produtor/consumidor-produtor/src/main/java/kafka/consumidor/produtor/config/KafkaConsumerConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/consumidor_produtor/consumidor-produtor/src/main/java/kafka/consumidor/produtor/config/KafkaProducerConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/consumidor_produtor/consumidor-produtor/src/main/java/kafka/consumidor/produtor/config/OpenApiConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/consumidor_produtor/consumidor-produtor/src/main/java/kafka/consumidor/produtor/controller/ProdutorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/consumidor_produtor/consumidor-produtor/src/main/java/kafka/consumidor/produtor/service/ConsumidorService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/consumidor_produtor/consumidor-produtor/src/main/java/kafka/consumidor/produtor/service/ProdutorService.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2D6H6oVkBg3DGgU2NA94gJqNZHS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Exercicios/Java/VemSerDBC/vemser-backend/modulo4.3/consumidor-produtor"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="713b53f9-ee64-44b7-a30e-5500b919fd33" name="Changes" comment="" />
+      <created>1660012444233</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1660012444233</updated>
+    </task>
+    <servers />
+  </component>
+</project>
