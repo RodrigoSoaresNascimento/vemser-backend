@@ -31,14 +31,7 @@ public class ConsumidorService {
                               @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
                               @Header(KafkaHeaders.OFFSET) Long offset) throws JsonProcessingException {
         MensagemDTO mensagemDTO = objectMapper.readValue(mensagem, MensagemDTO.class);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(mensagemDTO.getDataCriacao().format(formatter))
-                .append(" ")
-                .append("[")
-                .append(mensagemDTO.getUsuario())
-                .append("]:")
-                .append(mensagemDTO.getMensagem());
-        log.info("####{consume} offset -> '{}' key -> '{}' -> Consumed Object message -> '{}'  ", offset, key, stringBuilder);
+        log.info("####{consume} offset -> '{}' key -> '{}' -> Consumed Object message -> '{}'  ", offset, key, mensagem);
     }
 
     @KafkaListener(
@@ -50,15 +43,7 @@ public class ConsumidorService {
                                 @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
                                 @Header(KafkaHeaders.OFFSET) Long offset) throws JsonProcessingException {
         MensagemDTO mensagemDTO = objectMapper.readValue(mensagem, MensagemDTO.class);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(mensagemDTO.getDataCriacao().format(formatter))
-                .append(" ")
-                .append("[")
-                .append(mensagemDTO.getUsuario())
-                .append("]")
-                .append("(privada):")
-                .append(mensagemDTO.getMensagem());
-        log.info("####{consume} offset -> '{}' key -> '{}' -> Consumed Object message -> '{}'  ", offset, key, stringBuilder);
+        log.info("####{consume} offset -> '{}' key -> '{}' -> Consumed Object message -> '{}'  ", offset, key, mensagem);
     }
 
 }
