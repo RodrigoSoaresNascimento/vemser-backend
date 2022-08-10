@@ -29,7 +29,8 @@ public class ProdutorService {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     private final ObjectMapper objectMapper;
-    private final String USER = "Rodrigo";
+    @Value("${kafka.client-id}")
+    private String USER;
     @Value("${kafka.topic.rodrigo}")
     private String topicoMensagem;
 

@@ -31,11 +31,11 @@ public class ConsumidorService {
                               @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
                               @Header(KafkaHeaders.OFFSET) Long offset) throws JsonProcessingException {
         MensagemDTO mensagemDTO = objectMapper.readValue(mensagem, MensagemDTO.class);
-        log.info("####{consume} offset -> '{}' key -> '{}' -> Consumed Object message -> '{}'  ", offset, key, mensagem);
+        log.info(mensagemDTO.getDataCriacao().format(formatter) + " [ " + mensagemDTO.getUsuario() + " ]: " + mensagemDTO.getMensagem());
     }
 
     @KafkaListener(
-            topics = "${kafka.topic.rodrigo}", // meu-primeiro-topico
+            topics = "${kafka.topic.rodrigo}",
             groupId = "${kafka.client-id}",
             containerFactory = "listenerContainerFactory",
             clientIdPrefix = "rodrigo")
@@ -43,7 +43,7 @@ public class ConsumidorService {
                                 @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
                                 @Header(KafkaHeaders.OFFSET) Long offset) throws JsonProcessingException {
         MensagemDTO mensagemDTO = objectMapper.readValue(mensagem, MensagemDTO.class);
-        log.info("####{consume} offset -> '{}' key -> '{}' -> Consumed Object message -> '{}'  ", offset, key, mensagem);
+        log.info(mensagemDTO.getDataCriacao().format(formatter) + " [" + mensagemDTO.getUsuario() + "] " + "(privada): " + mensagemDTO.getMensagem());
     }
 
 }
