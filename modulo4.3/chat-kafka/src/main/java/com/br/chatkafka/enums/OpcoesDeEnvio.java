@@ -7,6 +7,7 @@ public enum OpcoesDeEnvio {
     GERAL("chat-geral"),
     BRUNO("chat-bruno"),
     CASTRO("chat-castro"),
+    CLEBER("chat-cleber"),
     CESAR("chat-cesar"),
     DAYVIDSON("chat-dayvidson"),
     GABRIEL("chat-gabriel"),

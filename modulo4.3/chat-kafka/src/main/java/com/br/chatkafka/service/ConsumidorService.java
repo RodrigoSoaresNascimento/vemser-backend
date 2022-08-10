@@ -24,7 +24,7 @@ public class ConsumidorService {
 
     @KafkaListener(
             topics = "${kafka.topic}",
-            groupId = "group1",
+            groupId = "${kafka.client-id}",
             containerFactory = "listenerContainerFactory",
             clientIdPrefix = "chatGeral")
     public void consumirGeral(@Payload String mensagem,
@@ -43,7 +43,7 @@ public class ConsumidorService {
 
     @KafkaListener(
             topics = "${kafka.topic.rodrigo}", // meu-primeiro-topico
-            groupId = "group1",
+            groupId = "${kafka.client-id}",
             containerFactory = "listenerContainerFactory",
             clientIdPrefix = "rodrigo")
     public void consumirPrivado(@Payload String mensagem,
